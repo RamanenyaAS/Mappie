@@ -42,15 +42,14 @@ const userLocationIcon = L.icon({
 
 const StyledCenterButton = styled.button`
   position: absolute;
-  top: 16px;
-  left: 16px;
+  bottom: 25px;
+  right: 50px;
   z-index: 1000;
   background-color: white;
   border: 1px solid #ccc;
-  padding: 8px 12px;
+  padding: 3px 3px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
 `
 
 const StyledMap = styled.div`
