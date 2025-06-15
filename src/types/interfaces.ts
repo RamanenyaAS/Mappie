@@ -1,8 +1,19 @@
+import type { ReactNode } from 'react';
+
+export interface IErrorBoundaryProps {
+  children: ReactNode;
+}
+
+export interface IErrorBoundaryState {
+  hasError: boolean;
+  errorInfo: string | null;
+}
+
 export interface IIconButton {
   icon: string;
-  type: "Search" | "Favorite" | "Login";
+  type: 'Search' | 'Favorite' | 'Login';
   alt?: string;
-  isActive?: boolean,
+  isActive?: boolean;
   onClick?: () => void;
 }
 
@@ -11,9 +22,9 @@ export interface ISidebar {
   setActiveTab: (tab: string | null) => void;
 }
 
-export interface IFavoriteCard{
+export interface IFavoriteCard {
   title: string;
   text: string;
   image: string;
   icons: string[];
-};
+}
