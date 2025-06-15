@@ -1,8 +1,12 @@
+import type { FC, SVGProps } from 'react';
+
+export type TPosition = [number, number];
+
 export interface IIconButton {
   icon: string;
-  type: "Search" | "Favorite" | "Login";
+  type: 'Search' | 'Favorite' | 'Login';
   alt?: string;
-  isActive?: boolean,
+  isActive?: boolean;
   onClick?: () => void;
 }
 
@@ -11,9 +15,19 @@ export interface ISidebar {
   setActiveTab: (tab: string | null) => void;
 }
 
-export interface IFavoriteCard{
+export interface IFavoriteCard {
   title: string;
   text: string;
   image: string;
   icons: string[];
-};
+}
+
+export interface IFilterItemData {
+  label: string;
+  icon: FC<SVGProps<SVGSVGElement>>;
+}
+
+export interface IFilterItem extends IFilterItemData {
+  selected: boolean;
+  onClick: () => void;
+}
