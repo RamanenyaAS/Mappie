@@ -3,11 +3,24 @@ import styled from 'styled-components';
 import SearchInput from './SearchInput';
 import SearchButton from './SearchButton';
 import FilterItem from './FilterItem';
-// import NatureIcon from "../assets/icons/Nature.svg?react";
-// import CultureIcon from "../assets/icons/Culture.svg?react";
-// import SportIcon from "../assets/icons/Sport.svg?react";
-import LoginIcon from '../assets/icons/IconLogin.svg?react';
 import type { IFilterItemData } from '../types/interfaces';
+import IconNature from '../assets/icons/IconNature.svg?react';
+import IconCulture from '../assets/icons/IconCulture.svg?react';
+import IconHistory from '../assets/icons/IconCulture.svg?react';
+import IconReligion from '../assets/icons/IconReligion.svg?react';
+import IconArchitecture from '../assets/icons/IconArchitecture.svg?react';
+import IconFactory from '../assets/icons/IconFactory.svg?react';
+import IconOther from '../assets/icons/IconOther.svg?react';
+import IconEntertainment from '../assets/icons/IconEntertainment.svg?react';
+import IconSport from '../assets/icons/IconSport.svg?react';
+import IconAuto from '../assets/icons/IconAuto.svg?react';
+import IconGas from '../assets/icons/IconGas.svg?react';
+import IconBike from '../assets/icons/IconBike.svg?react';
+import IconShop from '../assets/icons/IconShop.svg?react';
+import IconFood from '../assets/icons/IconFood.svg?react';
+import IconCoffee from '../assets/icons/IconCoffee.svg?react';
+import IconBank from '../assets/icons/IconBank.svg?react';
+import IconSleep from '../assets/icons/IconSleep.svg?react';
 
 const Panel = styled.div`
   width: 400px;
@@ -16,6 +29,20 @@ const Panel = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 510px;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 80px;
+    background-color: white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 1000;
+  }
 `;
 
 const TopSection = styled.div`
@@ -34,7 +61,7 @@ const FilterBlock = styled.div`
   height: 467px;
   border-radius: 10px;
   border: 3px solid #c4c4c4;
-  padding: 15px 25px 53px;
+  padding: 20px 60px 20px 20px;
   overflow-y: auto;
   margin-left: 25px;
 
@@ -66,8 +93,9 @@ const RadiusInput = styled.input`
   width: 100px;
   height: 50px;
   border-radius: 10px;
-  border: 3px solid #C4C4C4;
+  border: 3px solid #c4c4c4;
   padding-left: 30px;
+  outline: none;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
@@ -75,8 +103,9 @@ const RadiusInput = styled.input`
     margin: 0;
   }
 
-  [type="number"] {
+  [type='number'] {
     -moz-appearance: textfield;
+  }
 `;
 
 const RadiusInputText = styled.div`
@@ -87,9 +116,23 @@ const RadiusInputText = styled.div`
 const BottomSection = styled.div``;
 
 const filters: IFilterItemData[] = [
-  { label: 'Природа', icon: LoginIcon },
-  { label: 'Культура', icon: LoginIcon },
-  { label: 'Спорт', icon: LoginIcon },
+  { label: 'Природа', icon: IconNature },
+  { label: 'Культура', icon: IconCulture },
+  { label: 'История', icon: IconHistory },
+  { label: 'Религия', icon: IconReligion },
+  { label: 'Архитектура', icon: IconArchitecture },
+  { label: 'Индустриальные объекты', icon: IconFactory },
+  { label: 'Разное', icon: IconOther },
+  { label: 'Развлечения', icon: IconEntertainment },
+  { label: 'Спорт', icon: IconSport },
+  { label: 'Авто', icon: IconAuto },
+  { label: 'Заправки', icon: IconGas },
+  { label: 'Велосипеды', icon: IconBike },
+  { label: 'Магазины', icon: IconShop },
+  { label: 'Еда', icon: IconFood },
+  { label: 'Кофе/чай', icon: IconCoffee },
+  { label: 'Банки', icon: IconBank },
+  { label: 'Место для сна', icon: IconSleep },
 ];
 
 function SearchPanel() {

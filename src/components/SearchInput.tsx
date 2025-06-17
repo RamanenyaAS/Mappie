@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import IconSearch from '../assets/icons/IconSearch.svg?react';
+import type { ISearchInput } from '../types/interfaces';
 
 const InputWrapper = styled.div`
   position: relative;
@@ -18,7 +19,6 @@ const Input = styled.input`
   outline: none;
 
   &:focus {
-    border-color: #373737;
     box-shadow: 0 0 5px rgba(94, 123, 199, 0.5);
   }
 `;
@@ -34,11 +34,15 @@ const SearchIcon = styled(IconSearch)`
   pointer-events: none;
 `;
 
-export default function SearchInput() {
+export default function SearchInput({ value, onChange }: ISearchInput) {
   return (
     <InputWrapper>
       <SearchIcon />
-      <Input placeholder="Место, адрес.." />
+      <Input
+        placeholder="Место, адрес.."
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
     </InputWrapper>
   );
 }

@@ -4,14 +4,12 @@ import IconSearch from '../assets/icons/IconSearch.svg?react';
 import IconFavorite from '../assets/icons/IconFavorite.svg?react';
 import IconLogin from '../assets/icons/IconLogin.svg?react';
 
-// Цвета по типу кнопки
 const buttonColors: Record<IIconButton['type'], string> = {
   Search: '#5E7BC7',
   Favorite: '#C75E5E',
   Login: '#808080',
 };
 
-// Карта иконок
 const icons: Record<
   IIconButton['type'],
   React.FC<React.SVGProps<SVGSVGElement>>

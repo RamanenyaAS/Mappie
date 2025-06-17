@@ -31,3 +31,8 @@ export interface IFilterItem extends IFilterItemData {
   selected: boolean;
   onClick: () => void;
 }
+
+export interface ISearchInput {
+  value: string;
+  onChange: (val: string) => void;
+}
