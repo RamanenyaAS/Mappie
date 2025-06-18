@@ -1,6 +1,15 @@
-import type { FC, SVGProps } from 'react';
+import type { FC, SVGProps, ReactNode } from 'react';
 
 export type TPosition = [number, number];
+
+export interface IErrorBoundaryProps {
+  children: ReactNode;
+}
+
+export interface IErrorBoundaryState {
+  hasError: boolean;
+  errorInfo: string | null;
+}
 
 export interface IIconButton {
   icon: string;
