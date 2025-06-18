@@ -45,3 +45,10 @@ export interface ISearchInput {
   value: string;
   onChange: (val: string) => void;
 }
+
+export interface IUserSlice {
+  id: string | null;
+  email: string | null;
+  token: string | null;
+  emailVerified: boolean | null;
+}
