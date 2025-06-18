@@ -52,3 +52,25 @@ export interface IUserSlice {
   token: string | null;
   emailVerified: boolean | null;
 }
+
+export interface IPOI {
+  id: string;
+  lat: number;
+  lon: number;
+  name?: string;
+  category?: string;
+}
+
+export interface IPOIState {
+  items: IPOI[];
+  loading: boolean;
+  error: string | null;
+}
+
+export interface IOverpassElement {
+  id: number;
+  lat?: number;
+  lon?: number;
+  center?: { lat: number; lon: number };
+  tags?: { name?: string };
+}
