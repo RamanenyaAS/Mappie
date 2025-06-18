@@ -1,11 +1,12 @@
-import styled from "styled-components"
-import IconButton from "./IconButton"
-import type { ISidebar } from "../types/interfaces"
+import styled from 'styled-components';
+import IconButton from './IconButton';
+import type { ISidebar } from '../types/interfaces';
+import { useAuth } from '../hooks/useAuth';
 
-import IconLogo from "../assets/icons/IconLogo.svg"
-import IconSearch from "../assets/icons/IconSearch.svg"
-import IconFavorite from "../assets/icons/IconFavorite.svg"
-import IconLogin from "../assets/icons/IconLogin.svg"
+import IconLogo from '../assets/icons/IconLogo.svg';
+import IconSearch from '../assets/icons/IconSearch.svg';
+import IconFavorite from '../assets/icons/IconFavorite.svg';
+import IconLogin from '../assets/icons/IconLogin.svg';
 
 const SidebarWrapper = styled.div`
   width: 110px;
@@ -15,27 +16,28 @@ const SidebarWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: white;
-`
+`;
 
 const TopSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
-`
+`;
 
 const Logo = styled.img`
   width: 32px;
   height: 30px;
   margin-bottom: 40px;
-`
+`;
 
 function Sidebar({ activeTab, setActiveTab }: ISidebar) {
-
-  const toggleTab = (tab: "Search" | "Favorite") => {
+  const toggleTab = (tab: 'Search' | 'Favorite') => {
     const newTab = activeTab === tab ? null : tab;
     setActiveTab(newTab);
-  }
+  };
+
+  const { logout } = useAuth();
 
   return (
     <SidebarWrapper>
@@ -45,20 +47,20 @@ function Sidebar({ activeTab, setActiveTab }: ISidebar) {
           type="Search"
           icon={IconSearch}
           alt="Search"
-          isActive={activeTab === "Search"}
-          onClick={() => toggleTab("Search")}
+          isActive={activeTab === 'Search'}
+          onClick={() => toggleTab('Search')}
         />
         <IconButton
           type="Favorite"
           icon={IconFavorite}
           alt="Favorite"
-          isActive={activeTab === "Favorite"}
-          onClick={() => toggleTab("Favorite")}
+          isActive={activeTab === 'Favorite'}
+          onClick={() => toggleTab('Favorite')}
         />
       </TopSection>
-      <IconButton type="Login" icon={IconLogin} alt="Login" />
+      <IconButton type="Login" icon={IconLogin} alt="Login" onClick={logout} />
     </SidebarWrapper>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;
