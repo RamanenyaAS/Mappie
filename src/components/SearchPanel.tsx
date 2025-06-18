@@ -138,6 +138,7 @@ const filters: IFilterItemData[] = [
 function SearchPanel() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [radius, setRadius] = useState('45');
+  const [searchValue, setSearchValue] = useState('');
 
   const toggleFilter = (label: string) => {
     setSelectedFilters((prev) =>
@@ -148,7 +149,7 @@ function SearchPanel() {
   return (
     <Panel>
       <TopSection>
-        <SearchInput />
+        <SearchInput value={searchValue} onChange={setSearchValue} />
         <Title>Искать:</Title>
         <FilterBlock>
           {filters.map((item) => (

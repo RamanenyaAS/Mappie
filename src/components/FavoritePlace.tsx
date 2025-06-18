@@ -49,10 +49,8 @@ const CardText = styled.div`
   -webkit-box-orient: vertical;
 
   overflow: hidden;
-  /* text-overflow: ellipsis; // можно убрать, не нужен для multiline */
-
-  line-height: 1.2em; /* задаём высоту строки */
-  max-height: 3.6em; /* 3 строки * 1.2em */
+  line-height: 1.2em;
+  max-height: 3.6em;
 `;
 
 const IconsWrapper = styled.div`

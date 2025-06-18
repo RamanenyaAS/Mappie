@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import SearchInput from './SearchInput';
 import IconFavorite from '../assets/icons/IconFavorite.svg?react';
 import IconRoute from '../assets/icons/IconRoute.svg?react';
+import { useState } from 'react';
 
 const Panel = styled.div`
   width: 490px;
@@ -126,6 +127,7 @@ const RouteButton = styled(BaseButton)`
 `;
 
 function PlacePanel() {
+  const [searchValue, setSearchValue] = useState('');
   const place = {
     id: 1,
     title: 'Фантаcмагарический музей им. П.М. Машерова',
@@ -139,7 +141,7 @@ function PlacePanel() {
 
   return (
     <Panel>
-      <SearchInput />
+      <SearchInput value={searchValue} onChange={setSearchValue} />
       <Title>Избранное:</Title>
       <PlaceContainer>
         <PlaceImage src={place.image} alt={place.title} />
