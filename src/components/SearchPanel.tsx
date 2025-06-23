@@ -4,6 +4,10 @@ import SearchInput from './SearchInput';
 import SearchButton from './SearchButton';
 import FilterItem from './FilterItem';
 import type { IFilterItemData } from '../types/interfaces';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../store/store';
+import { fetchPOI, fetchPOIByName } from '../slices/poiSlice';
+
 import IconNature from '../assets/icons/IconNature.svg?react';
 import IconCulture from '../assets/icons/IconCulture.svg?react';
 import IconHistory from '../assets/icons/IconCulture.svg?react';
@@ -116,29 +120,59 @@ const RadiusInputText = styled.div`
 const BottomSection = styled.div``;
 
 const filters: IFilterItemData[] = [
-  { label: 'Природа', icon: IconNature },
-  { label: 'Культура', icon: IconCulture },
-  { label: 'История', icon: IconHistory },
-  { label: 'Религия', icon: IconReligion },
-  { label: 'Архитектура', icon: IconArchitecture },
-  { label: 'Индустриальные объекты', icon: IconFactory },
-  { label: 'Разное', icon: IconOther },
-  { label: 'Развлечения', icon: IconEntertainment },
-  { label: 'Спорт', icon: IconSport },
-  { label: 'Авто', icon: IconAuto },
-  { label: 'Заправки', icon: IconGas },
-  { label: 'Велосипеды', icon: IconBike },
-  { label: 'Магазины', icon: IconShop },
-  { label: 'Еда', icon: IconFood },
-  { label: 'Кофе/чай', icon: IconCoffee },
-  { label: 'Банки', icon: IconBank },
-  { label: 'Место для сна', icon: IconSleep },
+  { label: 'Природа', icon: IconNature, category: 'natural' },
+  { label: 'Культура', icon: IconCulture, category: 'cultural' },
+  { label: 'История', icon: IconHistory, category: 'historic' },
+  { label: 'Религия', icon: IconReligion, category: 'religion' },
+  { label: 'Архитектура', icon: IconArchitecture, category: 'architecture' },
+  {
+    label: 'Индустриальные объекты',
+    icon: IconFactory,
+    category: 'industrial_facilities',
+  },
+  { label: 'Разное', icon: IconOther, category: 'other' },
+  { label: 'Развлечения', icon: IconEntertainment, category: 'entertainments' },
+  { label: 'Спорт', icon: IconSport, category: 'sport' },
+  { label: 'Авто', icon: IconAuto, category: 'car_services' },
+  { label: 'Заправки', icon: IconGas, category: 'fuel' },
+  { label: 'Велосипеды', icon: IconBike, category: 'bicycle' },
+  { label: 'Магазины', icon: IconShop, category: 'shops' },
+  { label: 'Еда', icon: IconFood, category: 'foods' },
+  { label: 'Кофе/чай', icon: IconCoffee, category: 'catering' },
+  { label: 'Банки', icon: IconBank, category: 'banks' },
+  { label: 'Место для сна', icon: IconSleep, category: 'accomodations' },
 ];
 
 function SearchPanel() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [radius, setRadius] = useState('45');
   const [searchValue, setSearchValue] = useState('');
+  const dispatch = useDispatch<AppDispatch>();
+  const userLocation = useSelector((state: RootState) => state.userLocation);
+
+  const handleSearch = () => {
+    if (!userLocation.lat || !userLocation.lon) {
+      alert('Местоположение не определено');
+      return;
+    }
+
+    const selectedCategories = filters
+      .filter((f) => selectedFilters.includes(f.label))
+      .map((f) => f.category);
+
+    const kinds =
+      selectedCategories.length > 0 ? selectedCategories.join(',') : undefined;
+    const radiusMeters = Number(radius) * 1000;
+    const { lat, lon } = userLocation;
+
+    if (searchValue.trim()) {
+      dispatch(
+        fetchPOIByName({ query: searchValue, lat, lon, radius: radiusMeters })
+      );
+    } else {
+      dispatch(fetchPOI({ lat, lon, radius: radiusMeters, kinds }));
+    }
+  };
 
   const toggleFilter = (label: string) => {
     setSelectedFilters((prev) =>
@@ -157,6 +191,7 @@ function SearchPanel() {
               key={item.label}
               icon={item.icon}
               label={item.label}
+              category={item.category}
               selected={selectedFilters.includes(item.label)}
               onClick={() => toggleFilter(item.label)}
             />
@@ -173,7 +208,7 @@ function SearchPanel() {
         </DistanceBlock>
       </TopSection>
       <BottomSection>
-        <SearchButton />
+        <SearchButton onClick={handleSearch} />
       </BottomSection>
     </Panel>
   );

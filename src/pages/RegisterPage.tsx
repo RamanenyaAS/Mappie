@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { isValidEmail, isValidPassword } from '../utils/validation';
 
 const Form = styled.form`
   max-width: 350px;
@@ -63,6 +64,17 @@ function RegisterPage() {
     e.preventDefault();
     setInfo('');
     setError('');
+
+    if (!isValidEmail(email)) {
+      setError('Введите корректный email.');
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      setError('Пароль должен содержать минимум 6 символов.');
+      return;
+    }
+
     try {
       const { registerWithVerification } = await import(
         '../utils/registerWithVerification'
@@ -87,7 +99,6 @@ function RegisterPage() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         type="email"
-        required
         autoComplete="email"
       />
       <Input
@@ -95,7 +106,6 @@ function RegisterPage() {
         onChange={(e) => setPassword(e.target.value)}
         type="password"
         placeholder="Пароль"
-        required
         autoComplete="new-password"
       />
       <Button type="submit" disabled={loading}>

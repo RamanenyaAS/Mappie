@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import SearchIcon from '../assets/icons/IconSearch.svg?react';
+import type { ISearchButton } from '../types/interfaces';
 
 const Button = styled.button`
   cursor: pointer;
@@ -21,9 +22,9 @@ const Button = styled.button`
   }
 `;
 
-function SearchButton() {
+function SearchButton({ onClick }: ISearchButton) {
   return (
-    <Button>
+    <Button onClick={onClick}>
       <SearchIcon />
     </Button>
   );

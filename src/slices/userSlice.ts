@@ -1,4 +1,4 @@
-import type { IUserSlice } from '../../types/interfaces';
+import type { IUserSlice } from '../types/interfaces';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
@@ -29,5 +29,4 @@ const userSlice = createSlice({
 });
 
 export const { setUser, removeUser } = userSlice.actions;
-
 export default userSlice.reducer;

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setUser, removeUser } from '../store/slices/userSlice';
+import { setUser, removeUser } from '../slices/userSlice';
 import { auth, provider } from '../firebase';
 import {
   createUserWithEmailAndPassword,
