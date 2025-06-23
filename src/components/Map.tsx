@@ -1,11 +1,19 @@
-import { MapContainer, TileLayer, Marker, ZoomControl } from 'react-leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  ZoomControl,
+  Popup,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import IconUserLocation from '../assets/icons/IconUserLocation.svg';
 import CenterButton from './CenterButton';
-import type { TPosition } from '../types/interfaces';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserLocation } from '../slices/userLocationSlice';
+import type { RootState } from '../store/store';
 
 const DefaultIcon = L.icon({
   iconRetinaUrl:
@@ -41,14 +49,17 @@ const StyledMapContainer = styled(MapContainer)`
 `;
 
 function Map() {
-  const [position, setPosition] = useState<TPosition | null>(null);
+  const dispatch = useDispatch();
+  const [position, setPosition] = useState<[number, number] | null>(null);
+  const poi = useSelector((state: RootState) => state.poi.items);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
       const { latitude, longitude } = pos.coords;
       setPosition([latitude, longitude]);
+      dispatch(setUserLocation({ lat: latitude, lon: longitude }));
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <StyledMap>
@@ -59,6 +70,19 @@ function Map() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker position={position} icon={userLocationIcon} />
+          {poi.map(
+            (item) =>
+              item.lat &&
+              item.lon && (
+                <Marker key={item.id} position={[item.lat, item.lon]}>
+                  <Popup>
+                    {item.name || 'Без названия'}
+                    <br />
+                    Категория: {item.category}
+                  </Popup>
+                </Marker>
+              )
+          )}
           <ZoomControl position="bottomright" />
           <CenterButton position={position} />
         </StyledMapContainer>
