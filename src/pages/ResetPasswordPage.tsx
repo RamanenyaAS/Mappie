@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { isValidEmail } from '../utils/validation';
 
 const Form = styled.form`
   max-width: 350px;
@@ -58,6 +59,12 @@ function ResetPasswordPage() {
     e.preventDefault();
     setMsg('');
     setError('');
+
+    if (!isValidEmail(email)) {
+      setError('Введите корректный email.');
+      return;
+    }
+
     setLoading(true);
     try {
       await sendPasswordResetEmail(auth, email);
@@ -77,7 +84,7 @@ function ResetPasswordPage() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Ваш email"
         type="email"
-        required
+        autoComplete="email"
       />
       <Button type="submit" disabled={loading}>
         {loading ? 'Отправляем...' : 'Сбросить пароль'}

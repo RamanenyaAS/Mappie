@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { getFriendlyErrorMessage } from '../utils/getFriendlyErrorMessage';
+import { isValidEmail, isValidPassword } from '../utils/validation';
 
 const Form = styled.form`
   max-width: 350px;
@@ -78,6 +79,17 @@ function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    if (!isValidEmail(email)) {
+      setError('Введите корректный email.');
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      setError('Пароль должен быть не короче 6 символов.');
+      return;
+    }
+
     try {
       await login(email, password);
     } catch (e: unknown) {
@@ -102,7 +114,6 @@ function LoginPage() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         type="email"
-        required
         autoComplete="email"
       />
       <Input
@@ -110,14 +121,12 @@ function LoginPage() {
         onChange={(e) => setPassword(e.target.value)}
         type="password"
         placeholder="Пароль"
-        required
         autoComplete="current-password"
       />
       <ForgotPassword onClick={() => navigate('/reset-password')}>
         Забыли пароль?
       </ForgotPassword>
-      {error && <ErrorMsg>{getFriendlyErrorMessage(error)}</ErrorMsg>}
-
+      {error && <ErrorMsg>{error}</ErrorMsg>}
       <Button type="submit" disabled={loading}>
         {loading ? 'Входим...' : 'Войти'}
       </Button>
