@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
-import FavoritePlace from './FavoritePlace';
+import FavoriteCard from './FavoriteCard';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../store/store';
+import type { IPOI } from '../types/interfaces';
+import { useDispatch } from 'react-redux';
+import { setSelectedPOI } from '../slices/poiSlice';
 
 const Panel = styled.div`
   width: 400px;
@@ -9,6 +14,7 @@ const Panel = styled.div`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -45,56 +51,15 @@ const CardList = styled.div`
   gap: 25px;
 `;
 
-const favorites = [
-  {
-    id: 1,
-    title: 'Фантаcмагарический музей им. П.М. Машерова',
-    text: 'Lörem ipsum jere. Intrabel peraktiv pävufåsk läslov pide. Exon prelogi. Någonstansare  begöpp. Homoadoption tesände keck såsom köttrymden. Epigen digon fast svennefiera håven postfaktisk. Atomslöjd defåling nigovena tegt i platt-tv. Sextremism julgranssyndrom. Rit-avdrag fyr, jukanat don. Apfälla menskopp eftersom spetät senessa inklusive mepaktiga. Bloggbävning makroligt spepp gönas. Sitskate epir tidsfönster. Hjärtslagslag defånera. Neck röstsamtal möbelhund. Hexaledes ryggsäcksmodellen hikikomori när stenomiheten täpos. Du kan vara drabbad.',
-    image: 'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-    icons: [
-      'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-      'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-    ],
-  },
-  {
-    id: 2,
-    title: 'Городской парк',
-    text: 'Lörem ipsum jere. Intrabel peraktiv pävufåsk läslov pide. Exon prelogi. Någonstansare  begöpp. Homoadoption tesände keck såsom köttrymden. Epigen digon fast svennefiera håven postfaktisk. Atomslöjd defåling nigovena tegt i platt-tv. Sextremism julgranssyndrom. Rit-avdrag fyr, jukanat don. Apfälla menskopp eftersom spetät senessa inklusive mepaktiga. Bloggbävning makroligt spepp gönas. Sitskate epir tidsfönster. Hjärtslagslag defånera. Neck röstsamtal möbelhund. Hexaledes ryggsäcksmodellen hikikomori när stenomiheten täpos. Du kan vara drabbad.',
-    image: 'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-    icons: [
-      'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-      'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-    ],
-  },
-  {
-    id: 3,
-    title: 'Фантаcмагарический музей им. П.М. Машерова',
-    text: 'Lörem ipsum jere. Intrabel peraktiv pävufåsk läslov pide. Exon prelogi. Någonstansare  begöpp. Homoadoption tesände keck såsom köttrymden. Epigen digon fast svennefiera håven postfaktisk. Atomslöjd defåling nigovena tegt i platt-tv. Sextremism julgranssyndrom. Rit-avdrag fyr, jukanat don. Apfälla menskopp eftersom spetät senessa inklusive mepaktiga. Bloggbävning makroligt spepp gönas. Sitskate epir tidsfönster. Hjärtslagslag defånera. Neck röstsamtal möbelhund. Hexaledes ryggsäcksmodellen hikikomori när stenomiheten täpos. Du kan vara drabbad.',
-    image: 'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-    icons: [
-      'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-      'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-    ],
-  },
-  {
-    id: 4,
-    title: 'Фантаcмагарический музей им. П.М. Машерова',
-    text: 'Lörem ipsum jere. Intrabel peraktiv pävufåsk läslov pide. Exon prelogi. Någonstansare  begöpp. Homoadoption tesände keck såsom köttrymden. Epigen digon fast svennefiera håven postfaktisk. Atomslöjd defåling nigovena tegt i platt-tv. Sextremism julgranssyndrom. Rit-avdrag fyr, jukanat don. Apfälla menskopp eftersom spetät senessa inklusive mepaktiga. Bloggbävning makroligt spepp gönas. Sitskate epir tidsfönster. Hjärtslagslag defånera. Neck röstsamtal möbelhund. Hexaledes ryggsäcksmodellen hikikomori när stenomiheten täpos. Du kan vara drabbad.',
-    image: 'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-    icons: [
-      'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-      'https://random.dog/d25f1923-617b-4176-8388-4a3e040892af.jpg',
-    ],
-  },
-];
-
 function FavoritePanel() {
   const [searchValue, setSearchValue] = useState('');
+  const favorites = useSelector((state: RootState) => state.favorite.items);
+  const dispatch = useDispatch();
 
   const filteredFavorites = favorites.filter(
-    (item) =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-      item.text.toLowerCase().includes(searchValue.toLowerCase())
+    (item: IPOI) =>
+      item.name?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.description?.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
@@ -102,13 +67,16 @@ function FavoritePanel() {
       <SearchInput value={searchValue} onChange={setSearchValue} />
       <Title>Избранное:</Title>
       <CardList>
-        {filteredFavorites.map((item) => (
-          <FavoritePlace
+        {filteredFavorites.map((item: IPOI) => (
+          <FavoriteCard
             key={item.id}
-            title={item.title}
-            text={item.text}
-            image={item.image}
-            icons={item.icons}
+            id={item.id}
+            title={item.name || 'Без названия'}
+            text={item.description || 'Нет описания'}
+            image={item.photo || ''}
+            icons={[]}
+            isFavorite={true}
+            onClick={() => dispatch(setSelectedPOI(item))}
           />
         ))}
       </CardList>
