@@ -6,7 +6,7 @@ import { RequireAuth } from './components/RequireAuth';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import { useAuth } from './hooks/useAuth';
 import Loader from './components/Loader';
-import VerifyEmailPage from './components/VerifyEmailPage';
+import VerifyEmailPage from './pages/VerifyEmailPage';
 
 function App() {
   const { loading } = useAuth();
