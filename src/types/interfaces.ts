@@ -25,15 +25,18 @@ export interface ISidebar {
 }
 
 export interface IFavoriteCard {
+  id: string;
   title: string;
   text: string;
   image: string;
-  icons: string[];
+  icons: FC<SVGProps<SVGSVGElement>>[];
+  isFavorite: boolean;
 }
 
 export interface IFilterItemData {
   label: string;
   icon: FC<SVGProps<SVGSVGElement>>;
+  category: string;
 }
 
 export interface IFilterItem extends IFilterItemData {
@@ -57,14 +60,18 @@ export interface IPOI {
   id: string;
   lat: number;
   lon: number;
-  name?: string;
+  name: string;
   category?: string;
+  description?: string;
+  photo?: string;
+  address?: string;
 }
 
 export interface IPOIState {
   items: IPOI[];
   loading: boolean;
   error: string | null;
+  selectedPOI: IPOI | null;
 }
 
 export interface IOverpassElement {
@@ -73,4 +80,28 @@ export interface IOverpassElement {
   lon?: number;
   center?: { lat: number; lon: number };
   tags?: { name?: string };
+}
+
+export interface ISearchButton {
+  onClick?: () => void;
+}
+
+export interface ILocationState {
+  lat: number | null;
+  lon: number | null;
+}
+
+export interface IOverpassPOIItem {
+  xid: string;
+  point: {
+    lat: number;
+    lon: number;
+  };
+}
+
+export interface IFeatureItem {
+  properties: { xid: string };
+  geometry: {
+    coordinates: [number, number];
+  };
 }
