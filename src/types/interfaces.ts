@@ -12,8 +12,7 @@ export interface IErrorBoundaryState {
 }
 
 export interface IIconButton {
-  icon: string;
-  type: 'Search' | 'Favorite' | 'Login';
+  type: 'Search' | 'Favorite' | 'Logout';
   alt?: string;
   isActive?: boolean;
   onClick?: () => void;
@@ -29,7 +28,7 @@ export interface IFavoriteCard {
   title: string;
   text: string;
   image: string;
-  icons: FC<SVGProps<SVGSVGElement>>[];
+  icons?: FC<SVGProps<SVGSVGElement>>[];
   isFavorite: boolean;
 }
 

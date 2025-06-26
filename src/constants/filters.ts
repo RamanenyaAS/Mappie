@@ -1,0 +1,45 @@
+import type { IFilterItemData } from '../types/interfaces';
+
+import {
+  IconNature,
+  IconCulture,
+  IconHistory,
+  IconReligion,
+  IconArchitecture,
+  IconFactory,
+  IconOther,
+  IconEntertainment,
+  IconSport,
+  IconAuto,
+  IconGas,
+  IconBike,
+  IconShop,
+  IconFood,
+  IconCoffee,
+  IconBank,
+  IconSleep,
+} from '../assets/icons';
+
+export const filters: IFilterItemData[] = [
+  { label: 'Природа', icon: IconNature, category: 'natural' },
+  { label: 'Культура', icon: IconCulture, category: 'cultural' },
+  { label: 'История', icon: IconHistory, category: 'historic' },
+  { label: 'Религия', icon: IconReligion, category: 'religion' },
+  { label: 'Архитектура', icon: IconArchitecture, category: 'architecture' },
+  {
+    label: 'Индустриальные объекты',
+    icon: IconFactory,
+    category: 'industrial_facilities',
+  },
+  { label: 'Разное', icon: IconOther, category: 'other' },
+  { label: 'Развлечения', icon: IconEntertainment, category: 'entertainments' },
+  { label: 'Спорт', icon: IconSport, category: 'sport' },
+  { label: 'Авто', icon: IconAuto, category: 'car_services' },
+  { label: 'Заправки', icon: IconGas, category: 'fuel' },
+  { label: 'Велосипеды', icon: IconBike, category: 'bicycle' },
+  { label: 'Магазины', icon: IconShop, category: 'shops' },
+  { label: 'Еда', icon: IconFood, category: 'foods' },
+  { label: 'Кофе/чай', icon: IconCoffee, category: 'catering' },
+  { label: 'Банки', icon: IconBank, category: 'banks' },
+  { label: 'Место для сна', icon: IconSleep, category: 'accomodations' },
+];
