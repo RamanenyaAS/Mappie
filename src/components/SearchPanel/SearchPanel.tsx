@@ -1,0 +1,89 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import SearchInput from '../SearchInput/SearchInput';
+import SearchButton from '../SearchButton/SearchButton';
+import FilterItem from '../FilterItem/FilterItem';
+import { fetchPOI, fetchPOIByName } from '../../slices/poiSlice';
+import type { AppDispatch, RootState } from '../../store/store';
+import { filters } from '../../constants/filters';
+import {
+  Panel,
+  TopSection,
+  Title,
+  FilterBlock,
+  DistanceBlock,
+  RadiusInput,
+  RadiusInputText,
+} from './SearchPanel.styled';
+
+function SearchPanel() {
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [radius, setRadius] = useState('45');
+  const [searchValue, setSearchValue] = useState('');
+
+  const dispatch = useDispatch<AppDispatch>();
+  const userLocation = useSelector((state: RootState) => state.userLocation);
+
+  const handleSearch = () => {
+    if (!userLocation.lat || !userLocation.lon) {
+      alert('Местоположение не определено');
+      return;
+    }
+
+    const selectedCategories = filters
+      .filter((f) => selectedFilters.includes(f.label))
+      .map((f) => f.category);
+
+    const kinds =
+      selectedCategories.length > 0 ? selectedCategories.join(',') : undefined;
+    const radiusMeters = Number(radius) * 1000;
+    const { lat, lon } = userLocation;
+
+    if (searchValue.trim()) {
+      dispatch(
+        fetchPOIByName({ query: searchValue, lat, lon, radius: radiusMeters })
+      );
+    } else {
+      dispatch(fetchPOI({ lat, lon, radius: radiusMeters, kinds }));
+    }
+  };
+
+  const toggleFilter = (label: string) => {
+    setSelectedFilters((prev) =>
+      prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label]
+    );
+  };
+
+  return (
+    <Panel>
+      <TopSection>
+        <SearchInput value={searchValue} onChange={setSearchValue} />
+        <Title>Искать:</Title>
+        <FilterBlock>
+          {filters.map((item) => (
+            <FilterItem
+              key={item.label}
+              icon={item.icon}
+              label={item.label}
+              category={item.category}
+              selected={selectedFilters.includes(item.label)}
+              onClick={() => toggleFilter(item.label)}
+            />
+          ))}
+        </FilterBlock>
+        <Title>В радиусе</Title>
+        <DistanceBlock>
+          <RadiusInput
+            type="number"
+            value={radius}
+            onChange={(e) => setRadius(e.target.value)}
+          />
+          <RadiusInputText>км</RadiusInputText>
+        </DistanceBlock>
+      </TopSection>
+      <SearchButton onClick={handleSearch} />
+    </Panel>
+  );
+}
+
+export default SearchPanel;
