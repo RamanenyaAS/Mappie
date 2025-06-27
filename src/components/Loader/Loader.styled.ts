@@ -1,4 +1,9 @@
 import styled, { keyframes } from 'styled-components';
+import {
+  centerContent,
+  fontWeights,
+  fontFamilies,
+} from '../../common/common.styled';
 
 export const loadingAnim = keyframes`
   to {
@@ -7,16 +12,14 @@ export const loadingAnim = keyframes`
 `;
 
 export const LoaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${centerContent};
   height: 100vh;
 `;
 
 export const LoaderWrapper = styled.div`
   width: fit-content;
-  font-weight: bold;
-  font-family: monospace;
+  font-weight: ${fontWeights.bold};
+  font-family: ${fontFamilies.monospace};
   font-size: 30px;
   clip-path: inset(0 3ch 0 0);
   animation: ${loadingAnim} 1s steps(4) infinite;

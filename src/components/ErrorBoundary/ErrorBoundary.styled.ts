@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors, fontWeights, fontFamilies } from '../../common/common.styled';
 
 export const Wrapper = styled.div`
   padding: 30px;
@@ -7,22 +8,22 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h1`
   font-size: 28px;
-  font-weight: 800;
-  color: #d32f2f;
+  font-weight: ${fontWeights.extraBold};
+  color: ${colors.errorRed};
   margin-bottom: 10px;
 `;
 
 export const Message = styled.p`
   font-size: 20px;
-  color: #555;
-  font-weight: 600;
+  color: ${colors.darkText};
+  font-weight: ${fontWeights.medium};
 `;
 
 export const Details = styled.details`
   margin-top: 10px;
   white-space: pre-wrap;
-  color: #b71c1c;
-  font-family: monospace;
+  color: ${colors.monoRed};
+  font-family: ${fontFamilies.monospace};
   font-size: 14px;
-  font-weight: 400;
+  font-weight: ${fontWeights.regular};
 `;

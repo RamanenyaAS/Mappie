@@ -1,39 +1,40 @@
 import styled from 'styled-components';
 import type { IIconButton } from '../../types/interfaces';
+import {
+  colors,
+  borderRadius,
+  BaseButton,
+  BaseIconStyle,
+  border,
+} from '../../common/common.styled';
 
 export const buttonColors: Record<IIconButton['type'], string> = {
-  Search: '#5E7BC7',
-  Favorite: '#C75E5E',
-  Logout: '#808080',
+  Search: colors.primaryBlue,
+  Favorite: colors.accentRed,
+  Logout: colors.mediumGrey,
 };
 
-export const StyledButton = styled.button<{
+export const StyledButton = styled(BaseButton)<{
   $variant: IIconButton['type'];
   $active: boolean;
 }>`
   width: 60px;
   height: 60px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: ${({ $active }) => ($active ? '3px solid #C4C4C4' : 'none')};
+  border-radius: ${borderRadius.medium};
+  border: ${({ $active }) => ($active ? border.default : border.none)};
   background-color: ${({ $variant, $active }) =>
     $active ? 'transparent' : buttonColors[$variant]};
-  transition: all 0.2s ease;
   margin-top: ${({ $variant }) => ($variant === 'Favorite' ? '15px' : '0')};
   margin-bottom: ${({ $variant }) => ($variant === 'Logout' ? '35px' : '0')};
 
   &:hover {
-    border: 3px solid #c4c4c4;
+    border: ${border.default};
   }
 
   svg {
-    width: 24px;
-    height: 24px;
+    ${BaseIconStyle};
     color: ${({ $variant, $active }) =>
-      $active ? buttonColors[$variant] : '#fff'};
+      $active ? buttonColors[$variant] : colors.white};
     transition: color 0.2s ease;
   }
 `;
