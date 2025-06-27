@@ -1,9 +1,14 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { ILocationState } from '../types/interfaces';
 
-const initialState: ILocationState = {
+interface ILocationStateWithRadius extends ILocationState {
+  radius: string;
+}
+
+const initialState: ILocationStateWithRadius = {
   lat: null,
   lon: null,
+  radius: '45',
 };
 
 const userLocationSlice = createSlice({
@@ -17,8 +22,11 @@ const userLocationSlice = createSlice({
       state.lat = action.payload.lat;
       state.lon = action.payload.lon;
     },
+    setSearchRadius(state, action: PayloadAction<string>) {
+      state.radius = action.payload;
+    },
   },
 });
 
-export const { setUserLocation } = userLocationSlice.actions;
+export const { setUserLocation, setSearchRadius } = userLocationSlice.actions;
 export default userLocationSlice.reducer;

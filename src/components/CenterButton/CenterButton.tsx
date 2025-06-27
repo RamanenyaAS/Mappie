@@ -6,7 +6,7 @@ import { IconCenterMap } from '../../assets/icons';
 function CenterButton({ position }: { position: TPosition }) {
   const map = useMap();
   const handleClick = () => {
-    map.setView(position, 13);
+    map.setView(position, 16);
   };
   return (
     <StyledCenterButton onClick={handleClick}>
