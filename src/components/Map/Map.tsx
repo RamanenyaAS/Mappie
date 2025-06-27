@@ -1,4 +1,4 @@
-import { TileLayer, Marker, ZoomControl, Popup } from 'react-leaflet';
+import { TileLayer, Marker, ZoomControl, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useEffect, useState } from 'react';
@@ -6,7 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUserLocation } from '../../slices/userLocationSlice';
 import type { RootState } from '../../store/store';
 import CenterButton from '../CenterButton/CenterButton';
-import { StyledMap, StyledMapContainer } from './Map.styled';
+import {
+  StyledMap,
+  StyledMapContainer,
+  FixedCircleOptions,
+  DynamicCircleOptions,
+} from './Map.styled';
 import { IconUserLocation } from '../../assets/icons';
 
 const DefaultIcon = L.icon({
@@ -26,15 +31,18 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const userLocationIcon = L.icon({
   iconUrl: IconUserLocation,
-  iconSize: [32, 24],
-  iconAnchor: [16, 24],
-  popupAnchor: [0, -24],
+  iconSize: [20, 14],
+  iconAnchor: [10, 7],
+  popupAnchor: [0, -7],
 });
 
 function Map() {
   const dispatch = useDispatch();
   const [position, setPosition] = useState<[number, number] | null>(null);
   const poi = useSelector((state: RootState) => state.poi.items);
+  const searchRadius = useSelector(
+    (state: RootState) => state.userLocation.radius
+  );
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
@@ -47,12 +55,27 @@ function Map() {
   return (
     <StyledMap>
       {position && (
-        <StyledMapContainer center={position} zoom={13} zoomControl={false}>
+        <StyledMapContainer center={position} zoom={16} zoomControl={false}>
           <TileLayer
             attribution="&copy; OpenStreetMap contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker position={position} icon={userLocationIcon} />
+
+          <Circle
+            center={position}
+            radius={98}
+            pathOptions={FixedCircleOptions}
+          />
+
+          {searchRadius && (
+            <Circle
+              center={position}
+              radius={Number(searchRadius) * 1000}
+              pathOptions={DynamicCircleOptions}
+            />
+          )}
+
           {poi.map(
             (item) =>
               item.lat &&

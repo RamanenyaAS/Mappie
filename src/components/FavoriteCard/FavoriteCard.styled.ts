@@ -1,38 +1,45 @@
 import styled from 'styled-components';
 import { IconFavorite } from '../../assets/icons';
+import {
+  colors,
+  borderRadius,
+  flexColumn,
+  flexGap,
+  fontWeights,
+  BaseIconStyle,
+  border,
+} from '../../common/common.styled';
 
 export const Card = styled.div`
   padding: 20px;
-  border: 3px solid #c4c4c4;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
+  border: ${border.default};
+  border-radius: ${borderRadius.large};
+  ${flexColumn};
   cursor: pointer;
 `;
 
 export const CardTop = styled.div`
-  display: flex;
-  gap: 15px;
+  ${flexGap('15px')};
 `;
 
 export const CardImage = styled.img`
   width: 120px;
   height: 99px;
-  border-radius: 10px;
+  border-radius: ${borderRadius.large};
   object-fit: cover;
 `;
 
 export const CardTitle = styled.div`
-  font-weight: 800;
+  font-weight: ${fontWeights.extraBold};
   font-size: 16px;
   flex: 1;
 `;
 
 export const CardText = styled.div`
   font-size: 10px;
-  font-weight: 600;
+  font-weight: ${fontWeights.medium};
   margin-top: 10px;
-  color: #373737;
+  color: ${colors.darkGrey};
   max-height: 3.6em;
   overflow: hidden;
   line-height: 1.2em;
@@ -48,9 +55,9 @@ export const CardBottom = styled.div`
 `;
 
 export const IconStyled = styled(IconFavorite)<{ $active: boolean }>`
+  ${BaseIconStyle};
   width: 20px;
   height: 20px;
-  color: ${({ $active }) => ($active ? '#C75E5E' : '#808080')};
+  color: ${({ $active }) => ($active ? colors.accentRed : colors.mediumGrey)};
   cursor: pointer;
-  flex-shrink: 0;
 `;

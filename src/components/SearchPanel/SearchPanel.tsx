@@ -4,6 +4,7 @@ import SearchInput from '../SearchInput/SearchInput';
 import SearchButton from '../SearchButton/SearchButton';
 import FilterItem from '../FilterItem/FilterItem';
 import { fetchPOI, fetchPOIByName } from '../../slices/poiSlice';
+import { setSearchRadius } from '../../slices/userLocationSlice';
 import type { AppDispatch, RootState } from '../../store/store';
 import { filters } from '../../constants/filters';
 import {
@@ -18,11 +19,12 @@ import {
 
 function SearchPanel() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [radius, setRadius] = useState('45');
   const [searchValue, setSearchValue] = useState('');
 
   const dispatch = useDispatch<AppDispatch>();
   const userLocation = useSelector((state: RootState) => state.userLocation);
+
+  const radius = useSelector((state: RootState) => state.userLocation.radius);
 
   const handleSearch = () => {
     if (!userLocation.lat || !userLocation.lon) {
@@ -76,7 +78,7 @@ function SearchPanel() {
           <RadiusInput
             type="number"
             value={radius}
-            onChange={(e) => setRadius(e.target.value)}
+            onChange={(e) => dispatch(setSearchRadius(e.target.value))}
           />
           <RadiusInputText>км</RadiusInputText>
         </DistanceBlock>
