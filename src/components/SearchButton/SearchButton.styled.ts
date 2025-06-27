@@ -1,21 +1,25 @@
 import styled from 'styled-components';
+import {
+  BaseButton,
+  colors,
+  borderRadius,
+  border,
+} from '../../common/common.styled';
 
-export const Button = styled.button`
-  cursor: pointer;
+export const Button = styled(BaseButton)`
   width: 350px;
   height: 60px;
-  border-radius: 10px;
-  background-color: #5e7bc7;
-  color: #fff;
-  border: none;
-  transition: border 0.2s ease;
+  border-radius: ${borderRadius.large};
+  background-color: ${colors.primaryBlue};
+  color: ${colors.white};
+  border: ${border.none};
   margin: 0 25px 36px;
 
   &:hover {
-    border: 3px solid #c4c4c4;
+    border: ${border.default};
   }
 
   &:active {
-    border: 3px solid #808080;
+    border: 3px solid ${colors.mediumGrey};
   }
 `;

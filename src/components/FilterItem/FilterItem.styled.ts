@@ -1,16 +1,20 @@
 import styled from 'styled-components';
+import {
+  flexGap,
+  fontWeights,
+  BaseIconStyle,
+  colors,
+} from '../../common/common.styled';
 
 export const Wrapper = styled.div<{ selected: boolean }>`
-  display: flex;
+  ${flexGap('15px')};
   align-items: center;
-  gap: 15px;
   margin-bottom: 20px;
   cursor: pointer;
-  color: ${({ selected }) => (selected ? '#373737' : '#000000')};
-  font-weight: 600;
+  color: ${({ selected }) => (selected ? colors.darkGrey : colors.black)};
+  font-weight: ${fontWeights.medium};
 
   svg {
-    width: 24px;
-    height: 24px;
+    ${BaseIconStyle};
   }
 `;

@@ -1,18 +1,17 @@
 import styled from 'styled-components';
+import { colors, flexColumn } from '../../common/common.styled';
 
 export const SidebarWrapper = styled.div`
   width: 110px;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  ${flexColumn};
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: ${colors.white};
 `;
 
 export const TopSection = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${flexColumn};
   align-items: center;
   margin-top: 30px;
 `;
