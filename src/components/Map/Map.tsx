@@ -32,8 +32,8 @@ L.Marker.prototype.options.icon = DefaultIcon;
 const userLocationIcon = L.icon({
   iconUrl: IconUserLocation,
   iconSize: [20, 14],
-  iconAnchor: [10, 7], // Изменено для центрирования иконки
-  popupAnchor: [0, -7], // Скорректировано относительно нового iconAnchor
+  iconAnchor: [10, 7],
+  popupAnchor: [0, -7],
 });
 
 function Map() {
@@ -64,7 +64,7 @@ function Map() {
 
           <Circle
             center={position}
-            radius={98} // Радиус оставлен 98 метров, как вы просили
+            radius={98}
             pathOptions={FixedCircleOptions}
           />
 
