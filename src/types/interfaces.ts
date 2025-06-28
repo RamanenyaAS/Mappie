@@ -46,6 +46,7 @@ export interface IFilterItem extends IFilterItemData {
 export interface ISearchInput {
   value: string;
   onChange: (val: string) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export interface IUserSlice {
@@ -103,4 +104,8 @@ export interface IFeatureItem {
   geometry: {
     coordinates: [number, number];
   };
+}
+
+export interface IGoBackButtonProps {
+  onGoBack?: () => void;
 }

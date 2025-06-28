@@ -1,7 +1,7 @@
 import type { ISearchInput } from '../../types/interfaces';
 import { Input, InputWrapper, SearchIcon } from './SearchInput.styled';
 
-function SearchInput({ value, onChange }: ISearchInput) {
+function SearchInput({ value, onChange, onKeyDown }: ISearchInput) {
   return (
     <InputWrapper>
       <SearchIcon />
@@ -9,6 +9,7 @@ function SearchInput({ value, onChange }: ISearchInput) {
         placeholder="Место, адрес.."
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        onKeyDown={onKeyDown}
       />
     </InputWrapper>
   );
