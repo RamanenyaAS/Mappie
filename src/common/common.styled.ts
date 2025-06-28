@@ -18,6 +18,7 @@ export const colors = {
   primaryBlueAlpha: 'rgba(94, 123, 199, 0.5)',
   darkShadowAlpha: '#0000003d',
   lighterBorder: '#ddd',
+  transparentBlackBorder: '#00000033',
 };
 
 export const fontFamilies = {
@@ -106,4 +107,35 @@ export const BasePanel = styled.div`
   box-shadow: ${shadows.default};
   position: relative;
   background: ${colors.white};
+  height: 100vh;
+  border-left: ${border.default};
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -45px;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 80px;
+    background-color: ${colors.white};
+    border-top-right-radius: ${borderRadius.large};
+    border-bottom-right-radius: ${borderRadius.large};
+    z-index: 1000;
+  }
+`;
+
+export const PanelContentWrapper = styled.div`
+  width: 100%;
+  padding: 0px 25px;
+  overflow-y: auto;
+  ${hideScrollbar};
+  ${flexGap('25px')};
+  flex-direction: column;
+`;
+
+export const Title = styled.div`
+  padding: 5px 0px 15px 30px;
+  font-weight: ${fontWeights.extraBold};
+  font-size: 20px;
 `;
