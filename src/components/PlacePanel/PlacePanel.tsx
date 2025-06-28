@@ -15,6 +15,7 @@ import {
 import SearchInput from '../SearchInput/SearchInput';
 import { Title } from '../../common/common.styled';
 import { useState } from 'react';
+import { setRouteTarget } from '../../slices/routeSlice';
 
 function PlacePanel() {
   const dispatch = useDispatch<AppDispatch>();
@@ -47,7 +48,13 @@ function PlacePanel() {
             <IconFavorite />
             Избранное
           </FavoriteButton>
-          <RouteButton>
+          <RouteButton
+            onClick={() => {
+              if (poi?.lat && poi?.lon) {
+                dispatch(setRouteTarget({ lat: poi.lat, lon: poi.lon }));
+              }
+            }}
+          >
             <IconRoute />
             Маршрут
           </RouteButton>

@@ -3,13 +3,18 @@ import { MapContainer } from 'react-leaflet';
 
 export const StyledMap = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: relative;
 `;
 
 export const StyledMapContainer = styled(MapContainer)`
   width: 100%;
   height: 100%;
+
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const FixedCircleOptions = {

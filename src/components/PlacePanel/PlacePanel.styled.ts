@@ -8,6 +8,7 @@ import {
   PanelContentWrapper,
   border,
 } from '../../common/common.styled';
+import type { IFavoriteButtonProps } from '../../types/interfaces';
 
 export const Panel = styled(BasePanel)`
   width: 490px;
@@ -49,9 +50,9 @@ export const ButtonGroup = styled.div`
   }
 `;
 
-export const FavoriteButton = styled(BaseButton)<{
-  active: boolean;
-}>`
+export const FavoriteButton = styled(BaseButton).withConfig({
+  shouldForwardProp: (prop) => prop !== 'active',
+})<IFavoriteButtonProps>`
   background-color: ${({ active }) =>
     active ? colors.accentRed : colors.lightGreyBorder};
   color: ${colors.white};
