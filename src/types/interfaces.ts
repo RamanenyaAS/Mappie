@@ -43,6 +43,10 @@ export interface IFilterItem extends IFilterItemData {
   onClick: () => void;
 }
 
+export interface IFavoriteButtonProps {
+  active: boolean | undefined;
+}
+
 export interface ISearchInput {
   value: string;
   onChange: (val: string) => void;
@@ -108,4 +112,10 @@ export interface IFeatureItem {
 
 export interface IGoBackButtonProps {
   onGoBack?: () => void;
+}
+
+export interface IRouteState {
+  mapUrl: string | null;
+  distance: string | null;
+  duration: string | null;
 }
