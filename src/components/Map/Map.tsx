@@ -72,15 +72,22 @@ function RoutingLayer({
       routeWhileDragging: false,
       addWaypoints: false,
       draggableWaypoints: false,
-      show: false,
       createMarker: () => null,
+      show: false,
     });
 
     controlRef.current = routingControl;
     routingControl.addTo(map);
 
+    const container = routingControl.getContainer();
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+
     return () => {
-      map.removeControl(routingControl);
+      if (controlRef.current) {
+        map.removeControl(controlRef.current);
+      }
     };
   }, [from, to, map]);
 
@@ -113,13 +120,11 @@ function Map() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker position={position} icon={userLocationIcon} />
-
           <Circle
             center={position}
             radius={98}
             pathOptions={FixedCircleOptions}
           />
-
           {searchRadius && (
             <Circle
               center={position}
@@ -127,7 +132,6 @@ function Map() {
               pathOptions={DynamicCircleOptions}
             />
           )}
-
           {poi.map(
             (item) =>
               item.lat &&
@@ -149,11 +153,9 @@ function Map() {
               <Popup>Точка назначения</Popup>
             </Marker>
           )}
-
           {routeTarget && position && (
             <RoutingLayer from={position} to={routeTarget} />
           )}
-
           <ZoomControl position="bottomright" />
           <CenterButton position={position} />
         </StyledMapContainer>
