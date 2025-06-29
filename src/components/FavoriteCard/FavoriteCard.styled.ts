@@ -16,6 +16,10 @@ export const Card = styled.div`
   border-radius: ${borderRadius.large};
   ${flexColumn};
   cursor: pointer;
+
+  &:last-child {
+    margin-bottom: 15px;
+  }
 `;
 
 export const CardTop = styled.div`
@@ -51,7 +55,7 @@ export const CardText = styled.div`
 export const CardBottom = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 20px;
 `;
 
 export const IconStyled = styled(IconFavorite)<{ $active: boolean }>`

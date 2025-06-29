@@ -43,9 +43,14 @@ export interface IFilterItem extends IFilterItemData {
   onClick: () => void;
 }
 
+export interface IFavoriteButtonProps {
+  active: boolean | undefined;
+}
+
 export interface ISearchInput {
   value: string;
   onChange: (val: string) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export interface IUserSlice {
@@ -103,4 +108,14 @@ export interface IFeatureItem {
   geometry: {
     coordinates: [number, number];
   };
+}
+
+export interface IGoBackButtonProps {
+  onGoBack?: () => void;
+}
+
+export interface IRouteState {
+  mapUrl: string | null;
+  distance: string | null;
+  duration: string | null;
 }

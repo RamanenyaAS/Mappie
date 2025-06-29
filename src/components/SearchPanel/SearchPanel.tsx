@@ -10,12 +10,12 @@ import { filters } from '../../constants/filters';
 import {
   Panel,
   TopSection,
-  Title,
   FilterBlock,
   DistanceBlock,
   RadiusInput,
   RadiusInputText,
 } from './SearchPanel.styled';
+import { Title } from '../../common/common.styled';
 
 function SearchPanel() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -56,10 +56,20 @@ function SearchPanel() {
     );
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <Panel>
       <TopSection>
-        <SearchInput value={searchValue} onChange={setSearchValue} />
+        <SearchInput
+          value={searchValue}
+          onChange={setSearchValue}
+          onKeyDown={handleKeyDown}
+        />
         <Title>Искать:</Title>
         <FilterBlock>
           {filters.map((item) => (

@@ -1,7 +1,16 @@
-import { TileLayer, Marker, ZoomControl, Popup, Circle } from 'react-leaflet';
+import {
+  TileLayer,
+  Marker,
+  ZoomControl,
+  Popup,
+  Circle,
+  useMap,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import L from 'leaflet';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserLocation } from '../../slices/userLocationSlice';
 import type { RootState } from '../../store/store';
@@ -36,6 +45,41 @@ const userLocationIcon = L.icon({
   popupAnchor: [0, -7],
 });
 
+function RoutingLayer({
+  from,
+  to,
+}: {
+  from: [number, number];
+  to: { lat: number; lon: number };
+}) {
+  const map = useMap();
+  const controlRef = useRef<L.Routing.Control | null>(null);
+
+  useEffect(() => {
+    if (controlRef.current) {
+      map.removeControl(controlRef.current);
+    }
+
+    const routingControl = L.Routing.control({
+      waypoints: [L.latLng(from[0], from[1]), L.latLng(to.lat, to.lon)],
+      routeWhileDragging: false,
+      addWaypoints: false,
+      draggableWaypoints: false,
+      show: false,
+      createMarker: () => null,
+    });
+
+    controlRef.current = routingControl;
+    routingControl.addTo(map);
+
+    return () => {
+      map.removeControl(routingControl);
+    };
+  }, [from, to, map]);
+
+  return null;
+}
+
 function Map() {
   const dispatch = useDispatch();
   const [position, setPosition] = useState<[number, number] | null>(null);
@@ -43,6 +87,7 @@ function Map() {
   const searchRadius = useSelector(
     (state: RootState) => state.userLocation.radius
   );
+  const routeTarget = useSelector((state: RootState) => state.route.target);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
@@ -89,6 +134,10 @@ function Map() {
                 </Marker>
               )
           )}
+          {routeTarget && position && (
+            <RoutingLayer from={position} to={routeTarget} />
+          )}
+
           <ZoomControl position="bottomright" />
           <CenterButton position={position} />
         </StyledMapContainer>

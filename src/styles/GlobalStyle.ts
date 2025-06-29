@@ -1,10 +1,10 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 @font-face {
     font-family: 'Mont';
-   src: url('Mont-SemiBold.woff2') format('woff2'),
-        url('Mont-SemiBold.woff') format('woff'),
+    src: url('Mont-SemiBold.woff2') format('woff2'),
+        url('Mont-SemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -36,4 +36,4 @@ export const GlobalStyle = createGlobalStyle`
   body{
     font-family: 'Mont', sans-serif;
   }
-`
+`;

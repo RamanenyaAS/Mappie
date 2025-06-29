@@ -3,21 +3,19 @@ import {
   colors,
   borderRadius,
   fontWeights,
-  flexGap,
   BaseButton,
   BasePanel,
+  PanelContentWrapper,
   border,
 } from '../../common/common.styled';
+import type { IFavoriteButtonProps } from '../../types/interfaces';
 
 export const Panel = styled(BasePanel)`
   width: 490px;
-  height: 100vh;
-  overflow-y: auto;
-  padding: 20px;
 `;
 
 export const PlaceImage = styled.img`
-  width: 100%;
+  width: 400px;
   height: 300px;
   border-radius: ${borderRadius.large};
   object-fit: cover;
@@ -25,13 +23,14 @@ export const PlaceImage = styled.img`
 
 export const PlaceTitle = styled.h2`
   font-size: 24px;
+  color: ${colors.darkGrey};
   font-weight: ${fontWeights.extraBold};
   margin: 20px 0 10px;
 `;
 
 export const PlaceDescription = styled.p`
   font-size: 14px;
-  color: ${colors.darkText};
+  color: ${colors.darkGrey};
   margin-bottom: 20px;
 `;
 
@@ -42,29 +41,43 @@ export const Address = styled.p`
 `;
 
 export const ButtonGroup = styled.div`
-  ${flexGap('15px')};
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  svg {
+    width: 15px;
+    height: 20px;
+  }
 `;
 
-export const FavoriteButton = styled(BaseButton)<{ active: boolean }>`
-  border-radius: ${borderRadius.small};
-  font-size: 14px;
-  gap: 8px;
+export const FavoriteButton = styled(BaseButton).withConfig({
+  shouldForwardProp: (prop) => prop !== 'active',
+})<IFavoriteButtonProps>`
+  background-color: ${({ active }) =>
+    active ? colors.accentRed : colors.lightGreyBorder};
+  color: ${colors.white};
+  border-radius: ${borderRadius.large};
 
-  border: ${border.default};
-  background-color: ${colors.white};
-  color: ${({ active }) => (active ? colors.accentRed : colors.mediumGrey)};
-
-  svg {
-    color: currentColor;
+  &:hover {
+    background-color: ${({ active }) =>
+      active ? colors.monoRed : colors.mediumGrey};
   }
 `;
 
 export const RouteButton = styled(BaseButton)`
-  border-radius: ${borderRadius.small};
-  font-size: 14px;
-  gap: 8px;
-
   background-color: ${colors.primaryBlue};
   color: ${colors.white};
-  border: ${border.none};
+  border-radius: ${borderRadius.large};
+
+  &:hover {
+    background-color: ${colors.primaryBlueAlpha};
+  }
+`;
+
+export const PlaceWrapper = styled(PanelContentWrapper)`
+  width: 440px;
+  border: ${border.default};
+  margin: 0px 25px;
+  padding: 20px;
+  border-radius: ${borderRadius.large};
 `;

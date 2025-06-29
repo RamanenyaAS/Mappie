@@ -3,6 +3,7 @@ import userReducer from '../slices/userSlice';
 import poiReducer from '../slices/poiSlice';
 import favoriteReducer from '../slices/favoriteSlice';
 import userLocationReducer from '../slices/userLocationSlice';
+import routeRedicer from '../slices/routeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     poi: poiReducer,
     favorite: favoriteReducer,
     userLocation: userLocationReducer,
+    route: routeRedicer,
   },
 });
 

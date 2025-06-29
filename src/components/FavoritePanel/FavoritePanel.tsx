@@ -6,7 +6,8 @@ import type { RootState } from '../../store/store';
 import type { IPOI } from '../../types/interfaces';
 import { useDispatch } from 'react-redux';
 import { setSelectedPOI } from '../../slices/poiSlice';
-import { CardList, Panel, Title } from './FavoritePanel.styled';
+import { CardList, Panel } from './FavoritePanel.styled';
+import { PanelContentWrapper, Title } from '../../common/common.styled';
 
 function FavoritePanel() {
   const [searchValue, setSearchValue] = useState('');
@@ -23,20 +24,22 @@ function FavoritePanel() {
     <Panel>
       <SearchInput value={searchValue} onChange={setSearchValue} />
       <Title>Избранное:</Title>
-      <CardList>
-        {filteredFavorites.map((item: IPOI) => (
-          <FavoriteCard
-            key={item.id}
-            id={item.id}
-            title={item.name || 'Без названия'}
-            text={item.description || 'Нет описания'}
-            image={item.photo || ''}
-            icons={[]}
-            isFavorite={true}
-            onClick={() => dispatch(setSelectedPOI(item))}
-          />
-        ))}
-      </CardList>
+      <PanelContentWrapper>
+        <CardList>
+          {filteredFavorites.map((item: IPOI) => (
+            <FavoriteCard
+              key={item.id}
+              id={item.id}
+              title={item.name || 'Без названия'}
+              text={item.description || 'Нет описания'}
+              image={item.photo || ''}
+              icons={[]}
+              isFavorite={true}
+              onClick={() => dispatch(setSelectedPOI(item))}
+            />
+          ))}
+        </CardList>
+      </PanelContentWrapper>
     </Panel>
   );
 }
