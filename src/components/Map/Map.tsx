@@ -21,7 +21,7 @@ import {
   FixedCircleOptions,
   DynamicCircleOptions,
 } from './Map.styled';
-import { IconUserLocation } from '../../assets/icons';
+import { IconUserLocation, IconPOIMarker } from '../../assets/icons';
 
 const DefaultIcon = L.icon({
   iconRetinaUrl:
@@ -43,6 +43,13 @@ const userLocationIcon = L.icon({
   iconSize: [20, 14],
   iconAnchor: [10, 7],
   popupAnchor: [0, -7],
+});
+
+const poiIcon = L.icon({
+  iconUrl: IconPOIMarker,
+  iconSize: [18, 18],
+  iconAnchor: [9, 18],
+  popupAnchor: [0, -20],
 });
 
 function RoutingLayer({
@@ -125,15 +132,24 @@ function Map() {
             (item) =>
               item.lat &&
               item.lon && (
-                <Marker key={item.id} position={[item.lat, item.lon]}>
-                  <Popup>
-                    {item.name || 'Без названия'}
-                    <br />
-                    Категория: {item.category}
-                  </Popup>
+                <Marker
+                  key={item.id}
+                  position={[item.lat, item.lon]}
+                  icon={poiIcon}
+                >
+                  <Popup>{item.name || 'Без названия'}</Popup>
                 </Marker>
               )
           )}
+          {routeTarget && (
+            <Marker
+              position={[routeTarget.lat, routeTarget.lon]}
+              icon={poiIcon}
+            >
+              <Popup>Точка назначения</Popup>
+            </Marker>
+          )}
+
           {routeTarget && position && (
             <RoutingLayer from={position} to={routeTarget} />
           )}
