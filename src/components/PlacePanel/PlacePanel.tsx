@@ -11,6 +11,7 @@ import {
   PlaceTitle,
   PlaceWrapper,
   RouteButton,
+  Placeholder,
 } from './PlacePanel.styled';
 import SearchInput from '../SearchInput/SearchInput';
 import { Title } from '../../common/common.styled';
@@ -23,6 +24,7 @@ function PlacePanel() {
   const favorites = useSelector((state: RootState) => state.favorite.items);
   const isFavorite = poi && favorites.some((item) => item.id === poi.id);
   const [searchValue, setSearchValue] = useState('');
+  const [hasImageError, setHasImageError] = useState(false);
 
   if (!poi) return null;
 
@@ -37,10 +39,18 @@ function PlacePanel() {
 
   return (
     <Panel>
-      <SearchInput value={searchValue} onChange={setSearchValue}></SearchInput>
+      <SearchInput value={searchValue} onChange={setSearchValue} />
       <Title>Избранное</Title>
       <PlaceWrapper>
-        {poi.photo && <PlaceImage src={poi.photo} alt={poi.name} />}
+        {poi.photo && !hasImageError ? (
+          <PlaceImage
+            src={poi.photo}
+            alt={poi.name}
+            onError={() => setHasImageError(true)}
+          />
+        ) : (
+          <Placeholder>Нет фото</Placeholder>
+        )}
         <PlaceTitle>{poi.name || 'Без названия'}</PlaceTitle>
         <PlaceDescription>{poi.description || 'Нет описания'}</PlaceDescription>
         <ButtonGroup>

@@ -16,6 +16,7 @@ import IconLogo from './IconLogo.svg';
 import IconNature from './IconNature.svg?react';
 import IconNavArrow from './IconNavArrow.svg?react';
 import IconOther from './IconOther.svg?react';
+import IconPOIMarker from './IconPOIMarker.svg';
 import IconReligion from './IconReligion.svg?react';
 import IconRoute from './IconRoute.svg?react';
 import IconSearch from './IconSearch.svg?react';
@@ -43,6 +44,7 @@ export {
   IconNature,
   IconNavArrow,
   IconOther,
+  IconPOIMarker,
   IconReligion,
   IconRoute,
   IconSearch,

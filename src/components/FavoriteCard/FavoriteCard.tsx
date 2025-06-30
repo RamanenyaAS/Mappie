@@ -10,20 +10,23 @@ import {
   CardTitle,
   CardTop,
   IconStyled,
+  Placeholder,
 } from './FavoriteCard.styled';
 import { IconNavArrow } from '../../assets/icons';
+import { useState } from 'react';
 
 function FavoriteCard({
   id,
   title,
   text,
   image,
-  // icons, !!! ДОБАВИТЬ ИКОНКИ!!
   onClick,
 }: IFavoriteCard & { onClick?: () => void }) {
   const dispatch = useDispatch<AppDispatch>();
   const favorites = useSelector((state: RootState) => state.favorite.items);
   const isFavorite = favorites.some((f) => f.id === id);
+
+  const [hasImageError, setHasImageError] = useState(false);
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -46,13 +49,15 @@ function FavoriteCard({
   return (
     <Card onClick={onClick}>
       <CardTop>
-        <CardImage
-          src={image || '/fallback.jpg'}
-          alt={title}
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = '/fallback.jpg';
-          }}
-        />
+        {image && !hasImageError ? (
+          <CardImage
+            src={image}
+            alt={title}
+            onError={() => setHasImageError(true)}
+          />
+        ) : (
+          <Placeholder>Нет фото</Placeholder>
+        )}
         <CardTitle>{title}</CardTitle>
       </CardTop>
       <CardText>{text}</CardText>

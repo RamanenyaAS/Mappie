@@ -21,7 +21,7 @@ import {
   FixedCircleOptions,
   DynamicCircleOptions,
 } from './Map.styled';
-import { IconUserLocation } from '../../assets/icons';
+import { IconUserLocation, IconPOIMarker } from '../../assets/icons';
 
 const DefaultIcon = L.icon({
   iconRetinaUrl:
@@ -45,6 +45,13 @@ const userLocationIcon = L.icon({
   popupAnchor: [0, -7],
 });
 
+const poiIcon = L.icon({
+  iconUrl: IconPOIMarker,
+  iconSize: [18, 18],
+  iconAnchor: [9, 18],
+  popupAnchor: [0, -20],
+});
+
 function RoutingLayer({
   from,
   to,
@@ -65,15 +72,22 @@ function RoutingLayer({
       routeWhileDragging: false,
       addWaypoints: false,
       draggableWaypoints: false,
-      show: false,
       createMarker: () => null,
+      show: false,
     });
 
     controlRef.current = routingControl;
     routingControl.addTo(map);
 
+    const container = routingControl.getContainer();
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+
     return () => {
-      map.removeControl(routingControl);
+      if (controlRef.current) {
+        map.removeControl(controlRef.current);
+      }
     };
   }, [from, to, map]);
 
@@ -106,13 +120,11 @@ function Map() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker position={position} icon={userLocationIcon} />
-
           <Circle
             center={position}
             radius={98}
             pathOptions={FixedCircleOptions}
           />
-
           {searchRadius && (
             <Circle
               center={position}
@@ -120,24 +132,30 @@ function Map() {
               pathOptions={DynamicCircleOptions}
             />
           )}
-
           {poi.map(
             (item) =>
               item.lat &&
               item.lon && (
-                <Marker key={item.id} position={[item.lat, item.lon]}>
-                  <Popup>
-                    {item.name || 'Без названия'}
-                    <br />
-                    Категория: {item.category}
-                  </Popup>
+                <Marker
+                  key={item.id}
+                  position={[item.lat, item.lon]}
+                  icon={poiIcon}
+                >
+                  <Popup>{item.name || 'Без названия'}</Popup>
                 </Marker>
               )
+          )}
+          {routeTarget && (
+            <Marker
+              position={[routeTarget.lat, routeTarget.lon]}
+              icon={poiIcon}
+            >
+              <Popup>Точка назначения</Popup>
+            </Marker>
           )}
           {routeTarget && position && (
             <RoutingLayer from={position} to={routeTarget} />
           )}
-
           <ZoomControl position="bottomright" />
           <CenterButton position={position} />
         </StyledMapContainer>

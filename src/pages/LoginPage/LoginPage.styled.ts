@@ -43,6 +43,10 @@ export const Switch = styled.div`
   gap: 8px;
   font-size: 14px;
   text-align: center;
+
+  @media (max-width: 300px) {
+    flex-direction: column;
+  }
 `;
 
 export const ForgotPassword = styled.span`
