@@ -24,10 +24,14 @@ export const Card = styled.div`
 
 export const CardTop = styled.div`
   ${flexGap('15px')};
+
+  @media (max-width: 860px) {
+    ${flexGap('5px')};
+  }
 `;
 
 export const CardImage = styled.img`
-  width: 120px;
+  width: 45%;
   height: 99px;
   border-radius: ${borderRadius.large};
   object-fit: cover;
@@ -64,4 +68,17 @@ export const IconStyled = styled(IconFavorite)<{ $active: boolean }>`
   height: 20px;
   color: ${({ $active }) => ($active ? colors.accentRed : colors.mediumGrey)};
   cursor: pointer;
+`;
+
+export const Placeholder = styled.div`
+  width: 120px;
+  height: 99px;
+  background-color: #f0f0f0;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 12px;
+  object-fit: cover;
 `;

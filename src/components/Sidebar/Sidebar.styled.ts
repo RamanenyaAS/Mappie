@@ -8,6 +8,10 @@ export const SidebarWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: ${colors.white};
+
+  @media (max-width: 860px) {
+    width: 80px;
+  }
 `;
 
 export const TopSection = styled.div`

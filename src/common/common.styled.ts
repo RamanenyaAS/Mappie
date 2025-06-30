@@ -122,6 +122,12 @@ export const BasePanel = styled.div`
     border-top-right-radius: ${borderRadius.large};
     border-bottom-right-radius: ${borderRadius.large};
     z-index: 1000;
+
+    @media (max-width: 860px) {
+      width: 35px;
+      height: 70px;
+      right: -35px;
+    }
   }
 `;
 
@@ -132,10 +138,18 @@ export const PanelContentWrapper = styled.div`
   ${hideScrollbar};
   ${flexGap('25px')};
   flex-direction: column;
+
+  @media (max-width: 860px) {
+    padding: 0px 10px;
+  }
 `;
 
 export const Title = styled.div`
   padding: 5px 0px 15px 30px;
   font-weight: ${fontWeights.extraBold};
   font-size: 20px;
+
+  @media (max-width: 860px) {
+    padding: 5px 0px 5px 20px;
+  }
 `;
