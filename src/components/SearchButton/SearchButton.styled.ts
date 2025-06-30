@@ -7,7 +7,7 @@ import {
 } from '../../common/common.styled';
 
 export const Button = styled(BaseButton)`
-  width: 350px;
+  width: 87%;
   height: 60px;
   border-radius: ${borderRadius.large};
   background-color: ${colors.primaryBlue};
@@ -21,5 +21,8 @@ export const Button = styled(BaseButton)`
 
   &:active {
     border: 3px solid ${colors.mediumGrey};
+  }
+
+  @media (max-width: 860px) {
   }
 `;

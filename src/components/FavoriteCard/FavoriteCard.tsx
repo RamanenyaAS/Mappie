@@ -60,9 +60,7 @@ function FavoriteCard({
         )}
         <CardTitle>{title}</CardTitle>
       </CardTop>
-
       <CardText>{text}</CardText>
-
       <CardBottom>
         <IconStyled $active={isFavorite} onClick={handleFavoriteClick} />
         <IconNavArrow />

@@ -24,10 +24,14 @@ export const Card = styled.div`
 
 export const CardTop = styled.div`
   ${flexGap('15px')};
+
+  @media (max-width: 860px) {
+    ${flexGap('5px')};
+  }
 `;
 
 export const CardImage = styled.img`
-  width: 120px;
+  width: 45%;
   height: 99px;
   border-radius: ${borderRadius.large};
   object-fit: cover;

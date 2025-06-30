@@ -12,11 +12,18 @@ import type { IFavoriteButtonProps } from '../../types/interfaces';
 
 export const Panel = styled(BasePanel)`
   width: 490px;
+  @media (max-width: 1200px) {
+    width: 40%;
+  }
+
+  @media (max-width: 860px) {
+    min-width: 300px;
+  }
 `;
 
 export const PlaceImage = styled.img`
-  width: 400px;
-  height: 300px;
+  width: 100%;
+  height: auto;
   border-radius: ${borderRadius.large};
   object-fit: cover;
 `;
@@ -34,19 +41,17 @@ export const PlaceDescription = styled.p`
   margin-bottom: 20px;
 `;
 
-export const Address = styled.p`
-  font-size: 13px;
-  font-weight: ${fontWeights.medium};
-  margin-bottom: 30px;
-`;
-
 export const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 40px;
   svg {
     width: 15px;
     height: 20px;
+  }
+
+  @media (max-width: 980px) {
+    flex-direction: column;
+    gap: 15px;
   }
 `;
 
@@ -75,16 +80,16 @@ export const RouteButton = styled(BaseButton)`
 `;
 
 export const PlaceWrapper = styled(PanelContentWrapper)`
-  width: 440px;
+  width: 88%;
   border: ${border.default};
-  margin: 0px 25px;
+  margin: 0px 25px 5px 25px;
   padding: 20px;
   border-radius: ${borderRadius.large};
 `;
 
 export const Placeholder = styled.div`
-  width: 400px;
-  height: 300px;
+  width: 100%;
+  min-height: 250px;
   background-color: #f0f0f0;
   color: #999;
   display: flex;

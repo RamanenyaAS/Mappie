@@ -51,10 +51,8 @@ function PlacePanel() {
         ) : (
           <Placeholder>Нет фото</Placeholder>
         )}
-
         <PlaceTitle>{poi.name || 'Без названия'}</PlaceTitle>
         <PlaceDescription>{poi.description || 'Нет описания'}</PlaceDescription>
-
         <ButtonGroup>
           <FavoriteButton active={!!isFavorite} onClick={handleFavoriteToggle}>
             <IconFavorite />

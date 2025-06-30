@@ -12,22 +12,31 @@ import {
 export const Panel = styled(BasePanel)`
   width: 400px;
   height: 100vh;
-  justify-content: space-between;
+
+  @media (max-width: 1200px) {
+    width: 35%;
+  }
+
+  @media (max-width: 860px) {
+    width: 300px;
+  }
 `;
 
 export const TopSection = styled.div`
   ${flexColumn};
+  flex: 1;
+  overflow-y: auto;
 `;
 
 export const FilterBlock = styled.div`
-  width: 350px;
-  height: 467px;
+  width: 88%;
+  max-height: 49%;
   border-radius: ${borderRadius.large};
   border: ${border.default};
   padding: 20px 60px 20px 20px;
   overflow-y: auto;
   margin-left: 25px;
-
+  margin-bottom: 45px;
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -43,12 +52,21 @@ export const FilterBlock = styled.div`
 
   scrollbar-width: thin;
   scrollbar-color: #00000080 transparent;
+
+  @media (max-width: 860px) {
+    padding: 10px 50px 10px 10px;
+    margin-left: 15px;
+  }
 `;
 
 export const DistanceBlock = styled.div`
   ${flexGap('20px')};
   align-items: center;
   padding: 15px 25px;
+
+  @media (max-width: 860px) {
+    padding: 5px 15px;
+  }
 `;
 
 export const RadiusInput = styled(BaseInput)`
@@ -67,6 +85,10 @@ export const RadiusInput = styled(BaseInput)`
 
   [type='number'] {
     -moz-appearance: textfield;
+  }
+
+  @media (max-width: 860px) {
+    padding-left: 15px;
   }
 `;
 
