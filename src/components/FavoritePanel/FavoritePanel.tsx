@@ -1,13 +1,14 @@
-import SearchInput from '../SearchInput/SearchInput';
-import FavoriteCard from '../FavoriteCard/FavoriteCard';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import type { RootState } from '../../store/store';
-import type { IPOI } from '../../types/interfaces';
 import { useDispatch } from 'react-redux';
+
 import { setSelectedPOI } from '../../slices/poiSlice';
+import type { RootState } from '../../store/store';
+import { PanelContentWrapper, Title } from '../../styles/BaseStyle';
+import type { IPOI } from '../../types/interfaces';
+import FavoriteCard from '../FavoriteCard/FavoriteCard';
+import SearchInput from '../SearchInput/SearchInput';
 import { CardList, Panel } from './FavoritePanel.styled';
-import { PanelContentWrapper, Title } from '../../common/common.styled';
 
 function FavoritePanel() {
   const [searchValue, setSearchValue] = useState('');

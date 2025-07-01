@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { BaseButton } from '../../common/common.styled';
+
+import { BaseButton } from '../../styles/BaseStyle';
 
 export const StyledGoBackButton = styled(BaseButton)`
   background-color: transparent;

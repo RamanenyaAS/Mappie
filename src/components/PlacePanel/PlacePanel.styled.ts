@@ -1,13 +1,16 @@
 import styled from 'styled-components';
+
 import {
-  colors,
+  border,
   borderRadius,
+  colors,
   fontWeights,
+} from '../../constants/theme';
+import {
   BaseButton,
   BasePanel,
   PanelContentWrapper,
-  border,
-} from '../../common/common.styled';
+} from '../../styles/BaseStyle';
 import type { IFavoriteButtonProps } from '../../types/interfaces';
 
 export const Panel = styled(BasePanel)`

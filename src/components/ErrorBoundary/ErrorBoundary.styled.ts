@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { colors, fontWeights, fontFamilies } from '../../common/common.styled';
+
+import { colors, fontFamilies, fontWeights } from '../../constants/theme';
 
 export const Wrapper = styled.div`
   padding: 30px;

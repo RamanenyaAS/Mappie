@@ -1,7 +1,8 @@
 import { useMap } from 'react-leaflet';
+
+import { IconCenterMap } from '../../assets/icons';
 import type { TPosition } from '../../types/interfaces';
 import { StyledCenterButton } from './CenterButton.styled';
-import { IconCenterMap } from '../../assets/icons';
 
 function CenterButton({ position }: { position: TPosition }) {
   const map = useMap();

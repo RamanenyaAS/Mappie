@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchInput from '../SearchInput/SearchInput';
-import SearchButton from '../SearchButton/SearchButton';
-import FilterItem from '../FilterItem/FilterItem';
+
+import { filters } from '../../constants/filters';
 import { fetchPOI, fetchPOIByName } from '../../slices/poiSlice';
 import { setSearchRadius } from '../../slices/userLocationSlice';
 import type { AppDispatch, RootState } from '../../store/store';
-import { filters } from '../../constants/filters';
+import { Title } from '../../styles/BaseStyle';
+import FilterItem from '../FilterItem/FilterItem';
+import SearchButton from '../SearchButton/SearchButton';
+import SearchInput from '../SearchInput/SearchInput';
 import {
-  Panel,
-  TopSection,
-  FilterBlock,
   DistanceBlock,
+  FilterBlock,
+  Panel,
   RadiusInput,
   RadiusInputText,
+  TopSection,
 } from './SearchPanel.styled';
-import { Title } from '../../common/common.styled';
 
 function SearchPanel() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);

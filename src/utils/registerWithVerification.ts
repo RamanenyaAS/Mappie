@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from 'firebase/auth';
+
 import { auth } from '../firebase';
 
 export async function registerWithVerification(

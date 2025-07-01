@@ -1,6 +1,6 @@
-import { IconSearch, IconFavorite, IconLogout } from '../../assets/icons';
-import { StyledButton } from './IconButton.styled';
+import { IconFavorite, IconLogout, IconSearch } from '../../assets/icons';
 import type { IIconButton } from '../../types/interfaces';
+import { StyledButton } from './IconButton.styled';
 
 const icons: Record<
   IIconButton['type'],

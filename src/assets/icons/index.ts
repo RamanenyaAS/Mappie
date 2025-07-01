@@ -11,8 +11,8 @@ import IconFavorite from './IconFavorite.svg?react';
 import IconFood from './IconFood.svg?react';
 import IconGas from './IconGas.svg?react';
 import IconHistory from './IconHistory.svg?react';
-import IconLogout from './IconLogout.svg?react';
 import IconLogo from './IconLogo.svg';
+import IconLogout from './IconLogout.svg?react';
 import IconNature from './IconNature.svg?react';
 import IconNavArrow from './IconNavArrow.svg?react';
 import IconOther from './IconOther.svg?react';
@@ -39,8 +39,8 @@ export {
   IconFood,
   IconGas,
   IconHistory,
-  IconLogout,
   IconLogo,
+  IconLogout,
   IconNature,
   IconNavArrow,
   IconOther,

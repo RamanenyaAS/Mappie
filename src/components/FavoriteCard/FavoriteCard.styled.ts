@@ -1,14 +1,13 @@
 import styled from 'styled-components';
+
 import { IconFavorite } from '../../assets/icons';
 import {
-  colors,
-  borderRadius,
-  flexColumn,
-  flexGap,
-  fontWeights,
-  BaseIconStyle,
   border,
-} from '../../common/common.styled';
+  borderRadius,
+  colors,
+  fontWeights,
+} from '../../constants/theme';
+import { BaseIconStyle, flexColumn, flexGap } from '../../styles/BaseStyle';
 
 export const Card = styled.div`
   padding: 20px;

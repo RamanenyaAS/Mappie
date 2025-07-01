@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { BasePanel, flexColumn, flexGap } from '../../common/common.styled';
+
+import { BasePanel, flexColumn, flexGap } from '../../styles/BaseStyle';
 
 export const Panel = styled(BasePanel)`
   width: 400px;
