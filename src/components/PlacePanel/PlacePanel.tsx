@@ -1,22 +1,23 @@
-import { IconRoute, IconFavorite } from '../../assets/icons';
-import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '../../store/store';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { IconFavorite, IconRoute } from '../../assets/icons';
 import { addFavorite, removeFavorite } from '../../slices/favoriteSlice';
+import { setRouteTarget } from '../../slices/routeSlice';
+import type { AppDispatch, RootState } from '../../store/store';
+import { Title } from '../../styles/BaseStyle';
+import SearchInput from '../SearchInput/SearchInput';
 import {
   ButtonGroup,
   FavoriteButton,
   Panel,
   PlaceDescription,
+  Placeholder,
   PlaceImage,
   PlaceTitle,
   PlaceWrapper,
   RouteButton,
-  Placeholder,
 } from './PlacePanel.styled';
-import SearchInput from '../SearchInput/SearchInput';
-import { Title } from '../../common/common.styled';
-import { useState } from 'react';
-import { setRouteTarget } from '../../slices/routeSlice';
 
 function PlacePanel() {
   const dispatch = useDispatch<AppDispatch>();

@@ -1,16 +1,17 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { filters } from '../../constants/filters';
 import {
   fetchPOI,
   fetchPOIByName,
   setSelectedPOI,
 } from '../../slices/poiSlice';
-import type { RootState, AppDispatch } from '../../store/store';
+import type { AppDispatch, RootState } from '../../store/store';
+import { PanelContentWrapper, Title } from '../../styles/BaseStyle';
 import FavoriteCard from '../FavoriteCard/FavoriteCard';
-import { Panel } from './SearchResultsPanel.styled';
-import { PanelContentWrapper, Title } from '../../common/common.styled';
 import SearchInput from '../SearchInput/SearchInput';
-import { useState } from 'react';
-import { filters } from '../../constants/filters';
+import { Panel } from './SearchResultsPanel.styled';
 
 function SearchResultsPanel() {
   const [searchValue, setSearchValue] = useState('');

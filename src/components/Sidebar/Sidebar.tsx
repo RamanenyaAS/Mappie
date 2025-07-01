@@ -1,8 +1,8 @@
-import IconButton from '../IconButton/IconButton';
-import type { ISidebar } from '../../types/interfaces';
-import { useAuth } from '../../hooks/useAuth';
-import { Logo, SidebarWrapper, TopSection } from './Sidebar.styled';
 import { IconLogo } from '../../assets/icons';
+import { useAuth } from '../../hooks/useAuth';
+import type { ISidebar } from '../../types/interfaces';
+import IconButton from '../IconButton/IconButton';
+import { Logo, SidebarWrapper, TopSection } from './Sidebar.styled';
 
 function Sidebar({ activeTab, setActiveTab }: ISidebar) {
   const toggleTab = (tab: 'Search' | 'Favorite') => {

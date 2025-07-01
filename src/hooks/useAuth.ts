@@ -1,16 +1,17 @@
-import { useDispatch } from 'react-redux';
-import { setUser, removeUser } from '../slices/userSlice';
-import { auth, provider } from '../firebase';
+import type { User } from 'firebase/auth';
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  onAuthStateChanged,
 } from 'firebase/auth';
-import type { User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { auth, provider } from '../firebase';
+import { removeUser, setUser } from '../slices/userSlice';
 
 export function useAuth() {
   const dispatch = useDispatch();

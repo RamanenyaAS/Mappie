@@ -1,14 +1,15 @@
-import Map from '../../components/Map/Map';
-import Sidebar from '../../components/Sidebar/Sidebar';
 import { useEffect, useState } from 'react';
-import SearchPanel from '../../components/SearchPanel/SearchPanel';
-import FavoritePanel from '../../components/FavoritePanel/FavoritePanel';
-import SearchResultsPanel from '../../components/SearchResultsPanel/SearchResultsPanel';
 import { useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from '../../store/store';
 import { useDispatch } from 'react-redux';
-import { clearPOI, setSelectedPOI } from '../../slices/poiSlice';
+
+import FavoritePanel from '../../components/FavoritePanel/FavoritePanel';
+import Map from '../../components/Map/Map';
 import PlacePanel from '../../components/PlacePanel/PlacePanel';
+import SearchPanel from '../../components/SearchPanel/SearchPanel';
+import SearchResultsPanel from '../../components/SearchResultsPanel/SearchResultsPanel';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import { clearPOI, setSelectedPOI } from '../../slices/poiSlice';
+import type { AppDispatch, RootState } from '../../store/store';
 import { MapWrapper, Wrapper } from './HomePage.styled';
 
 function HomePage() {

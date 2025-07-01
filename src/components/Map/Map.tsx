@@ -1,27 +1,29 @@
-import {
-  TileLayer,
-  Marker,
-  ZoomControl,
-  Popup,
-  Circle,
-  useMap,
-} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+
 import L from 'leaflet';
 import { useEffect, useRef, useState } from 'react';
+import {
+  Circle,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  ZoomControl,
+} from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { IconPOIMarker, IconUserLocation } from '../../assets/icons';
 import { setUserLocation } from '../../slices/userLocationSlice';
 import type { RootState } from '../../store/store';
 import CenterButton from '../CenterButton/CenterButton';
 import {
+  DynamicCircleOptions,
+  FixedCircleOptions,
   StyledMap,
   StyledMapContainer,
-  FixedCircleOptions,
-  DynamicCircleOptions,
 } from './Map.styled';
-import { IconUserLocation, IconPOIMarker } from '../../assets/icons';
 
 const DefaultIcon = L.icon({
   iconRetinaUrl:

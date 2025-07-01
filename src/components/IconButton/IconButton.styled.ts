@@ -1,12 +1,8 @@
 import styled from 'styled-components';
+
+import { border, borderRadius, colors } from '../../constants/theme';
+import { BaseButton, BaseIconStyle } from '../../styles/BaseStyle';
 import type { IIconButton } from '../../types/interfaces';
-import {
-  colors,
-  borderRadius,
-  BaseButton,
-  BaseIconStyle,
-  border,
-} from '../../common/common.styled';
 
 export const buttonColors: Record<IIconButton['type'], string> = {
   Search: colors.primaryBlue,

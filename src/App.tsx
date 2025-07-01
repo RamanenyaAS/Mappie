@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
+
+import Loader from './components/Loader/Loader';
+import { useAuth } from './hooks/useAuth';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
-import { RequireAuth } from './routes/RequireAuth';
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage';
-import { useAuth } from './hooks/useAuth';
-import Loader from './components/Loader/Loader';
 import VerifyEmailPage from './pages/VerifyEmailPage/VerifyEmailPage';
+import { RequireAuth } from './routes/RequireAuth';
 
 function App() {
   const { loading } = useAuth();

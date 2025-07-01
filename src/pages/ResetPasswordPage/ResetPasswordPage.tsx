@@ -1,9 +1,10 @@
-import { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { auth } from '../../firebase';
 import { isValidEmail } from '../../utils/validation';
-import { Button, ErrorMsg, Input, Msg, Form } from './ResetPasswordPage.styled';
+import { Button, ErrorMsg, Form, Input, Msg } from './ResetPasswordPage.styled';
 
 function ResetPasswordPage() {
   const [email, setEmail] = useState('');

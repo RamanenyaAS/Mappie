@@ -1,13 +1,12 @@
 import styled from 'styled-components';
+
+import { border, borderRadius, fontWeights } from '../../constants/theme';
 import {
-  borderRadius,
-  flexColumn,
-  fontWeights,
-  flexGap,
-  BasePanel,
   BaseInput,
-  border,
-} from '../../common/common.styled';
+  BasePanel,
+  flexColumn,
+  flexGap,
+} from '../../styles/BaseStyle';
 
 export const Panel = styled(BasePanel)`
   width: 400px;

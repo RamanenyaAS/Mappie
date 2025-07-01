@@ -1,10 +1,7 @@
 import styled, { keyframes } from 'styled-components';
-import {
-  centerContent,
-  fontWeights,
-  fontFamilies,
-} from '../../common/common.styled';
 
+import { fontFamilies, fontWeights } from '../../constants/theme';
+import { centerContent } from '../../styles/BaseStyle';
 export const loadingAnim = keyframes`
   to {
     clip-path: inset(0 -1ch 0 0);

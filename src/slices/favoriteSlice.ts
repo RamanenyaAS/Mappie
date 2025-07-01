@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+
 import type { IPOI } from '../types/interfaces';
 
 const FAVORITES_KEY = 'mappie_favorites';

@@ -1,9 +1,10 @@
+import { sendEmailVerification } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Form, useNavigate } from 'react-router-dom';
-import type { RootState } from '../../store/store';
+
 import { auth } from '../../firebase';
-import { sendEmailVerification } from 'firebase/auth';
+import type { RootState } from '../../store/store';
 import {
   Button,
   ButtonBlock,

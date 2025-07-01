@@ -1,4 +1,4 @@
-import type { FC, SVGProps, ReactNode } from 'react';
+import type { FC, ReactNode, SVGProps } from 'react';
 
 export type TPosition = [number, number];
 
