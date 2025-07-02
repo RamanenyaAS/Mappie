@@ -1,24 +1,23 @@
-import type { IFilterItemData } from '../types/interfaces';
-
+import type { IFilterItemData } from '@appTypes/interfaces';
 import {
-  IconNature,
-  IconCulture,
-  IconHistory,
-  IconReligion,
   IconArchitecture,
-  IconFactory,
-  IconOther,
-  IconEntertainment,
-  IconSport,
   IconAuto,
-  IconGas,
-  IconBike,
-  IconShop,
-  IconFood,
-  IconCoffee,
   IconBank,
+  IconBike,
+  IconCoffee,
+  IconCulture,
+  IconEntertainment,
+  IconFactory,
+  IconFood,
+  IconGas,
+  IconHistory,
+  IconNature,
+  IconOther,
+  IconReligion,
+  IconShop,
   IconSleep,
-} from '../assets/icons';
+  IconSport,
+} from '@assets/icons';
 
 export const filters: IFilterItemData[] = [
   { label: 'Природа', icon: IconNature, category: 'natural' },

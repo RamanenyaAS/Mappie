@@ -1,7 +1,10 @@
-import type { IFavoriteCard } from '../../types/interfaces';
-import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '../../store/store';
-import { addFavorite, removeFavorite } from '../../slices/favoriteSlice';
+import type { IFavoriteCard } from '@appTypes/interfaces';
+import { IconNavArrow } from '@assets/icons';
+import { addFavorite, removeFavorite } from '@slices/favoriteSlice';
+import type { AppDispatch, RootState } from '@store/store';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   Card,
   CardBottom,
@@ -12,8 +15,6 @@ import {
   IconStyled,
   Placeholder,
 } from './FavoriteCard.styled';
-import { IconNavArrow } from '../../assets/icons';
-import { useState } from 'react';
 
 function FavoriteCard({
   id,

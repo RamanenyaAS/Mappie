@@ -1,14 +1,7 @@
+import type { IFavoriteButtonProps } from '@appTypes/interfaces';
+import { border, borderRadius, colors, fontWeights } from '@constants/theme';
+import { BaseButton, BasePanel, PanelContentWrapper } from '@styles/BaseStyle';
 import styled from 'styled-components';
-import {
-  colors,
-  borderRadius,
-  fontWeights,
-  BaseButton,
-  BasePanel,
-  PanelContentWrapper,
-  border,
-} from '../../common/common.styled';
-import type { IFavoriteButtonProps } from '../../types/interfaces';
 
 export const Panel = styled(BasePanel)`
   width: 490px;

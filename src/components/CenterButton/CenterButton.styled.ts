@@ -1,5 +1,6 @@
+import { borderRadius, colors } from '@constants/theme';
+import { BaseButton } from '@styles/BaseStyle';
 import styled from 'styled-components';
-import { BaseButton, colors, borderRadius } from '../../common/common.styled';
 
 export const StyledCenterButton = styled(BaseButton)`
   position: absolute;

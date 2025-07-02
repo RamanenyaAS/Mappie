@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { MapContainer } from 'react-leaflet';
+import styled from 'styled-components';
 
 export const StyledMap = styled.div`
   width: 100%;

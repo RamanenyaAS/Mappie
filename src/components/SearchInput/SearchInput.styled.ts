@@ -1,12 +1,7 @@
+import { IconSearch } from '@assets/icons';
+import { border, colors, fontWeights } from '@constants/theme';
+import { BaseIconStyle, BaseInput } from '@styles/BaseStyle';
 import styled from 'styled-components';
-import IconSearch from '../../assets/icons/IconSearch.svg?react';
-import {
-  colors,
-  border,
-  fontWeights,
-  BaseInput,
-  BaseIconStyle,
-} from '../../common/common.styled';
 
 export const InputWrapper = styled.div`
   position: relative;

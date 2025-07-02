@@ -1,13 +1,6 @@
+import { border, borderRadius, fontWeights } from '@constants/theme';
+import { BaseInput, BasePanel, flexColumn, flexGap } from '@styles/BaseStyle';
 import styled from 'styled-components';
-import {
-  borderRadius,
-  flexColumn,
-  fontWeights,
-  flexGap,
-  BasePanel,
-  BaseInput,
-  border,
-} from '../../common/common.styled';
 
 export const Panel = styled(BasePanel)`
   width: 400px;

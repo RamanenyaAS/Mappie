@@ -1,5 +1,6 @@
-import { IconSearch } from '../../assets/icons';
-import type { ISearchButton } from '../../types/interfaces';
+import type { ISearchButton } from '@appTypes/interfaces';
+import { IconSearch } from '@assets/icons';
+
 import { Button } from './SearchButton.styled';
 
 function SearchButton({ onClick }: ISearchButton) {

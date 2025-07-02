@@ -1,8 +1,8 @@
+import { auth } from '@firebase';
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from 'firebase/auth';
-import { auth } from '../firebase';
 
 export async function registerWithVerification(
   email: string,

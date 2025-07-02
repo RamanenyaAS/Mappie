@@ -1,6 +1,7 @@
-import { IconNavArrow } from '../../assets/icons';
+import type { IGoBackButtonProps } from '@appTypes/interfaces';
+import { IconNavArrow } from '@assets/icons';
+
 import { StyledGoBackButton } from './GoBackButton.styled';
-import type { IGoBackButtonProps } from '../../types/interfaces';
 
 function GoBackButton({ onGoBack }: IGoBackButtonProps) {
   return (

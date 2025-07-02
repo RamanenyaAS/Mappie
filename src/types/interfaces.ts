@@ -1,4 +1,4 @@
-import type { FC, SVGProps, ReactNode } from 'react';
+import type { FC, ReactNode, SVGProps } from 'react';
 
 export type TPosition = [number, number];
 
@@ -119,3 +119,5 @@ export interface IRouteState {
   distance: string | null;
   duration: string | null;
 }
+
+export type TPOIMarkerProps = Pick<IPOI, 'lat' | 'lon' | 'name'>;
