@@ -119,3 +119,5 @@ export interface IRouteState {
   distance: string | null;
   duration: string | null;
 }
+
+export type TPOIMarkerProps = Pick<IPOI, 'lat' | 'lon' | 'name'>;

@@ -1,7 +1,6 @@
+import type { IUserSlice } from '@appTypes/interfaces';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-
-import type { IUserSlice } from '../types/interfaces';
 
 const initialState: IUserSlice = {
   email: null,

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-
 import type {
   IErrorBoundaryProps,
   IErrorBoundaryState,
-} from '../../types/interfaces';
+} from '@appTypes/interfaces';
+import React, { Component } from 'react';
+
 import { Details, Message, Title, Wrapper } from './ErrorBoundary.styled';
 
 class ErrorBoundary extends Component<

@@ -1,7 +1,6 @@
+import { border, borderRadius, colors } from '@constants/theme';
+import { BaseButton } from '@styles/BaseStyle';
 import styled from 'styled-components';
-
-import { border, borderRadius, colors } from '../../constants/theme';
-import { BaseButton } from '../../styles/BaseStyle';
 
 export const Button = styled(BaseButton)`
   width: 87%;

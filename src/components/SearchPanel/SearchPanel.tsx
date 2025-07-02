@@ -1,14 +1,14 @@
+import FilterItem from '@components/FilterItem/FilterItem';
+import SearchButton from '@components/SearchButton/SearchButton';
+import SearchInput from '@components/SearchInput/SearchInput';
+import { filters } from '@constants/filters';
+import { fetchPOI, fetchPOIByName } from '@slices/poiSlice';
+import { setSearchRadius } from '@slices/userLocationSlice';
+import type { AppDispatch, RootState } from '@store/store';
+import { Title } from '@styles/BaseStyle';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { filters } from '../../constants/filters';
-import { fetchPOI, fetchPOIByName } from '../../slices/poiSlice';
-import { setSearchRadius } from '../../slices/userLocationSlice';
-import type { AppDispatch, RootState } from '../../store/store';
-import { Title } from '../../styles/BaseStyle';
-import FilterItem from '../FilterItem/FilterItem';
-import SearchButton from '../SearchButton/SearchButton';
-import SearchInput from '../SearchInput/SearchInput';
 import {
   DistanceBlock,
   FilterBlock,

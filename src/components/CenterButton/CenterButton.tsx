@@ -1,17 +1,22 @@
+import type { TPosition } from '@appTypes/interfaces';
+import { IconCenterMap } from '@assets/icons';
+import { DEFAULT_MAP_ZOOM } from '@constants/mapConfig';
 import { useMap } from 'react-leaflet';
 
-import { IconCenterMap } from '../../assets/icons';
-import type { TPosition } from '../../types/interfaces';
 import { StyledCenterButton } from './CenterButton.styled';
 
 function CenterButton({ position }: { position: TPosition }) {
   const map = useMap();
   const handleClick = () => {
-    map.setView(position, 16);
+    map.setView(position, DEFAULT_MAP_ZOOM);
   };
   return (
     <StyledCenterButton onClick={handleClick}>
-      <img src={IconCenterMap}></img>
+      <img
+        src={IconCenterMap}
+        alt="Center Map"
+        title="Нажмите для центрирования карты"
+      />
     </StyledCenterButton>
   );
 }

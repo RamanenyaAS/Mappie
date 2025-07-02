@@ -1,7 +1,6 @@
+import { colors } from '@constants/theme';
+import { flexColumn } from '@styles/BaseStyle';
 import styled from 'styled-components';
-
-import { colors } from '../../constants/theme';
-import { flexColumn } from '../../styles/BaseStyle';
 
 export const SidebarWrapper = styled.div`
   width: 110px;

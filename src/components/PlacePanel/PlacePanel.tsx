@@ -1,12 +1,12 @@
+import { IconFavorite, IconRoute } from '@assets/icons';
+import SearchInput from '@components/SearchInput/SearchInput';
+import { addFavorite, removeFavorite } from '@slices/favoriteSlice';
+import { setRouteTarget } from '@slices/routeSlice';
+import type { AppDispatch, RootState } from '@store/store';
+import { Title } from '@styles/BaseStyle';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IconFavorite, IconRoute } from '../../assets/icons';
-import { addFavorite, removeFavorite } from '../../slices/favoriteSlice';
-import { setRouteTarget } from '../../slices/routeSlice';
-import type { AppDispatch, RootState } from '../../store/store';
-import { Title } from '../../styles/BaseStyle';
-import SearchInput from '../SearchInput/SearchInput';
 import {
   ButtonGroup,
   FavoriteButton,

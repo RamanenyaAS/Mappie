@@ -1,4 +1,5 @@
-import type { ISearchInput } from '../../types/interfaces';
+import type { ISearchInput } from '@appTypes/interfaces';
+
 import { Input, InputWrapper, SearchIcon } from './SearchInput.styled';
 
 function SearchInput({ value, onChange, onKeyDown }: ISearchInput) {

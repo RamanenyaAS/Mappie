@@ -1,16 +1,12 @@
+import FavoriteCard from '@components/FavoriteCard/FavoriteCard';
+import SearchInput from '@components/SearchInput/SearchInput';
+import { filters } from '@constants/filters';
+import { fetchPOI, fetchPOIByName, setSelectedPOI } from '@slices/poiSlice';
+import type { AppDispatch, RootState } from '@store/store';
+import { PanelContentWrapper, Title } from '@styles/BaseStyle';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { filters } from '../../constants/filters';
-import {
-  fetchPOI,
-  fetchPOIByName,
-  setSelectedPOI,
-} from '../../slices/poiSlice';
-import type { AppDispatch, RootState } from '../../store/store';
-import { PanelContentWrapper, Title } from '../../styles/BaseStyle';
-import FavoriteCard from '../FavoriteCard/FavoriteCard';
-import SearchInput from '../SearchInput/SearchInput';
 import { Panel } from './SearchResultsPanel.styled';
 
 function SearchResultsPanel() {

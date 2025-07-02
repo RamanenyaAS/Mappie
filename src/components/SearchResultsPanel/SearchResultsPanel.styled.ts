@@ -1,7 +1,6 @@
+import { colors } from '@constants/theme';
+import { BasePanel } from '@styles/BaseStyle';
 import styled from 'styled-components';
-
-import { colors } from '../../constants/theme';
-import { BasePanel } from '../../styles/BaseStyle';
 
 export const Panel = styled(BasePanel)`
   width: 400px;

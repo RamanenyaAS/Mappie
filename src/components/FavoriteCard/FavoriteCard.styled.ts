@@ -1,13 +1,7 @@
+import { IconFavorite } from '@assets/icons';
+import { border, borderRadius, colors, fontWeights } from '@constants/theme';
+import { BaseIconStyle, flexColumn, flexGap } from '@styles/BaseStyle';
 import styled from 'styled-components';
-
-import { IconFavorite } from '../../assets/icons';
-import {
-  border,
-  borderRadius,
-  colors,
-  fontWeights,
-} from '../../constants/theme';
-import { BaseIconStyle, flexColumn, flexGap } from '../../styles/BaseStyle';
 
 export const Card = styled.div`
   padding: 20px;
