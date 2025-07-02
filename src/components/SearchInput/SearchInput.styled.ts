@@ -19,6 +19,11 @@ export const Input = styled(BaseInput)`
 
   &:focus {
     box-shadow: 0 0 5px ${colors.primaryBlueAlpha};
+
+    @media (max-width: 400px) {
+      width: 90%;
+      padding: 10px 50px;
+    }
   }
 `;
 
