@@ -75,7 +75,7 @@ function Map() {
             />
           )}
           {visiblePOI.map(({ id, lat, lon, name }) => (
-            <POIMarker key={id} id={id} lat={lat} lon={lon} name={name} />
+            <POIMarker key={id} lat={lat} lon={lon} name={name} />
           ))}
           {routeTarget && (
             <Marker
