@@ -32,4 +32,9 @@ export const StyledButton = styled(BaseButton)<{
       $active ? buttonColors[$variant] : colors.white};
     transition: color 0.2s ease;
   }
+
+  @media (max-width: 400px) {
+    width: 40px;
+    height: 40px;
+  }
 `;

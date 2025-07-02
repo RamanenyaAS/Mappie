@@ -38,6 +38,10 @@ export const BaseIconStyle = css`
   width: 24px;
   height: 24px;
   flex-shrink: 0;
+
+  @media (max-width: 400px) {
+    width: 15px;
+  }
 `;
 
 export const BaseButton = styled.button`
@@ -50,6 +54,10 @@ export const BaseButton = styled.button`
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;
+
+  @media (max-width: 400px) {
+    padding: 5px 10px;
+  }
 `;
 
 export const BaseInput = styled.input`
@@ -58,6 +66,10 @@ export const BaseInput = styled.input`
   border: ${border.input};
   font-family: ${fontFamilies.primary};
   outline: none;
+
+  @media (max-width: 400px) {
+    padding: 5px;
+  }
 `;
 
 export const BasePanel = styled.div`
@@ -68,6 +80,9 @@ export const BasePanel = styled.div`
   height: 100vh;
   border-left: ${border.default};
 
+  @media (max-width: 400px) {
+    width: 90%;
+  }
   &::after {
     content: '';
     position: absolute;

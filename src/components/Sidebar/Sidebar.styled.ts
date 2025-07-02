@@ -13,6 +13,10 @@ export const SidebarWrapper = styled.div`
   @media (max-width: 860px) {
     width: 80px;
   }
+
+  @media (max-width: 400px) {
+    width: 70px;
+  }
 `;
 
 export const TopSection = styled.div`
@@ -25,4 +29,9 @@ export const Logo = styled.img`
   width: 32px;
   height: 30px;
   margin-bottom: 40px;
+
+  @media (max-width: 400px) {
+    width: 20px;
+    height: 20px;
+  }
 `;

@@ -16,10 +16,16 @@ export const Card = styled.div`
 `;
 
 export const CardTop = styled.div`
+  display: flex;
   ${flexGap('15px')};
 
   @media (max-width: 860px) {
     ${flexGap('5px')};
+  }
+
+  @media (max-width: 400px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -28,6 +34,10 @@ export const CardImage = styled.img`
   height: 99px;
   border-radius: ${borderRadius.large};
   object-fit: cover;
+
+  @media (max-width: 400px) {
+    width: 90%;
+  }
 `;
 
 export const CardTitle = styled.div`
