@@ -1,6 +1,9 @@
+/* eslint-disable simple-import-sort/imports */
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+/* eslint-enable simple-import-sort/imports */
 
 import type { TPOIMarkerProps } from '@appTypes/interfaces';
 import CenterButton from '@components/CenterButton/CenterButton';
@@ -19,7 +22,6 @@ import {
 import { useUserLocation } from '@hooks/useUserLocation';
 import type { RootState } from '@store/store';
 import { DefaultIcon, poiIcon, userLocationIcon } from '@utils/mapUtils';
-import L from 'leaflet';
 import { memo, useMemo } from 'react';
 import { Circle, Marker, Popup, TileLayer, ZoomControl } from 'react-leaflet';
 import { useSelector } from 'react-redux';
