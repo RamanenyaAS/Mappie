@@ -1,12 +1,11 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
 import type {
   IFeatureItem,
   IOverpassPOIItem,
   IPOI,
   IPOIState,
-} from '../types/interfaces';
+} from '@appTypes/interfaces';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const API_KEY = import.meta.env.VITE_OPENTRIPMAP_API_KEY;
 

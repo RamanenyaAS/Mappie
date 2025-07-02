@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-
-import favoriteReducer from '../slices/favoriteSlice';
-import poiReducer from '../slices/poiSlice';
-import routeRedicer from '../slices/routeSlice';
-import userLocationReducer from '../slices/userLocationSlice';
-import userReducer from '../slices/userSlice';
+import favoriteReducer from '@slices/favoriteSlice';
+import poiReducer from '@slices/poiSlice';
+import routeRedicer from '@slices/routeSlice';
+import userLocationReducer from '@slices/userLocationSlice';
+import userReducer from '@slices/userSlice';
 
 export const store = configureStore({
   reducer: {

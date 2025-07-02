@@ -1,10 +1,10 @@
+import type { IFavoriteCard } from '@appTypes/interfaces';
+import { IconNavArrow } from '@assets/icons';
+import { addFavorite, removeFavorite } from '@slices/favoriteSlice';
+import type { AppDispatch, RootState } from '@store/store';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IconNavArrow } from '../../assets/icons';
-import { addFavorite, removeFavorite } from '../../slices/favoriteSlice';
-import type { AppDispatch, RootState } from '../../store/store';
-import type { IFavoriteCard } from '../../types/interfaces';
 import {
   Card,
   CardBottom,

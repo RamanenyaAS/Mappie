@@ -1,9 +1,9 @@
+import { auth } from '@firebase';
+import { isValidEmail } from '@utils/validation';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { auth } from '../../firebase';
-import { isValidEmail } from '../../utils/validation';
 import { Button, ErrorMsg, Form, Input, Msg } from './ResetPasswordPage.styled';
 
 function ResetPasswordPage() {

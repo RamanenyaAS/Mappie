@@ -1,3 +1,4 @@
+import type { IFilterItemData } from '@appTypes/interfaces';
 import {
   IconArchitecture,
   IconAuto,
@@ -16,8 +17,7 @@ import {
   IconShop,
   IconSleep,
   IconSport,
-} from '../assets/icons';
-import type { IFilterItemData } from '../types/interfaces';
+} from '@assets/icons';
 
 export const filters: IFilterItemData[] = [
   { label: 'Природа', icon: IconNature, category: 'natural' },

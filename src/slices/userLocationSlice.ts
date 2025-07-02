@@ -1,6 +1,5 @@
+import type { ILocationState } from '@appTypes/interfaces';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-
-import type { ILocationState } from '../types/interfaces';
 
 interface ILocationStateWithRadius extends ILocationState {
   radius: string;

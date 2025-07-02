@@ -1,5 +1,3 @@
-import styled, { css } from 'styled-components';
-
 import {
   border,
   borderRadius,
@@ -7,7 +5,8 @@ import {
   fontFamilies,
   fontWeights,
   shadows,
-} from '../constants/theme';
+} from '@constants/theme';
+import styled, { css } from 'styled-components';
 
 export const flexColumn = css`
   display: flex;

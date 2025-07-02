@@ -1,3 +1,5 @@
+import { auth, provider } from '@firebase';
+import { removeUser, setUser } from '@slices/userSlice';
 import type { User } from 'firebase/auth';
 import {
   createUserWithEmailAndPassword,
@@ -9,9 +11,6 @@ import {
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import { auth, provider } from '../firebase';
-import { removeUser, setUser } from '../slices/userSlice';
 
 export function useAuth() {
   const dispatch = useDispatch();

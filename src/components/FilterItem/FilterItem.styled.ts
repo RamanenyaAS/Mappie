@@ -1,7 +1,6 @@
+import { colors, fontWeights } from '@constants/theme';
+import { BaseIconStyle, flexGap } from '@styles/BaseStyle';
 import styled from 'styled-components';
-
-import { colors, fontWeights } from '../../constants/theme';
-import { BaseIconStyle, flexGap } from '../../styles/BaseStyle';
 
 export const Wrapper = styled.div<{ selected: boolean }>`
   ${flexGap('15px')};

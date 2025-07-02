@@ -2,6 +2,24 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
+import { IconPOIMarker, IconUserLocation } from '@assets/icons';
+import CenterButton from '@components/CenterButton/CenterButton';
+import {
+  DynamicCircleOptions,
+  FixedCircleOptions,
+  StyledMap,
+  StyledMapContainer,
+} from '@components/Map/Map.styled';
+import {
+  DEFAULT_MAP_ZOOM,
+  DEFAULT_MARKER_ICON_SIZE,
+  FIXED_CIRCLE_RADIUS,
+  POI_ICON_SIZE,
+  RADIUS_MULTIPLIER,
+  USER_ICON_SIZE,
+} from '@constants/mapConfig';
+import { setUserLocation } from '@slices/userLocationSlice';
+import type { RootState } from '@store/store';
 import L from 'leaflet';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -14,17 +32,6 @@ import {
 } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IconPOIMarker, IconUserLocation } from '../../assets/icons';
-import { setUserLocation } from '../../slices/userLocationSlice';
-import type { RootState } from '../../store/store';
-import CenterButton from '../CenterButton/CenterButton';
-import {
-  DynamicCircleOptions,
-  FixedCircleOptions,
-  StyledMap,
-  StyledMapContainer,
-} from './Map.styled';
-
 const DefaultIcon = L.icon({
   iconRetinaUrl:
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
@@ -32,7 +39,7 @@ const DefaultIcon = L.icon({
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   shadowUrl:
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-  iconSize: [25, 41],
+  iconSize: DEFAULT_MARKER_ICON_SIZE,
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41],
@@ -42,14 +49,14 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const userLocationIcon = L.icon({
   iconUrl: IconUserLocation,
-  iconSize: [20, 14],
+  iconSize: USER_ICON_SIZE,
   iconAnchor: [10, 7],
   popupAnchor: [0, -7],
 });
 
 const poiIcon = L.icon({
   iconUrl: IconPOIMarker,
-  iconSize: [18, 18],
+  iconSize: POI_ICON_SIZE,
   iconAnchor: [9, 18],
   popupAnchor: [0, -20],
 });
@@ -116,7 +123,11 @@ function Map() {
   return (
     <StyledMap>
       {position && (
-        <StyledMapContainer center={position} zoom={16} zoomControl={false}>
+        <StyledMapContainer
+          center={position}
+          zoom={DEFAULT_MAP_ZOOM}
+          zoomControl={false}
+        >
           <TileLayer
             attribution="&copy; OpenStreetMap contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -124,13 +135,13 @@ function Map() {
           <Marker position={position} icon={userLocationIcon} />
           <Circle
             center={position}
-            radius={98}
+            radius={FIXED_CIRCLE_RADIUS}
             pathOptions={FixedCircleOptions}
           />
           {searchRadius && (
             <Circle
               center={position}
-              radius={Number(searchRadius) * 1000}
+              radius={Number(searchRadius) * RADIUS_MULTIPLIER}
               pathOptions={DynamicCircleOptions}
             />
           )}

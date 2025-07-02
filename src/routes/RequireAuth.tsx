@@ -1,7 +1,6 @@
+import type { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-
-import type { RootState } from '../store/store';
 
 export function RequireAuth({ children }: { children: React.ReactElement }) {
   const user = useSelector((state: RootState) => state.user);

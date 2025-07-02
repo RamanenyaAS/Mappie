@@ -1,4 +1,5 @@
-import type { IFilterItem } from '../../types/interfaces';
+import type { IFilterItem } from '@appTypes/interfaces';
+
 import { Wrapper } from './FilterItem.styled';
 
 function FilterItem({ label, icon: Icon, selected, onClick }: IFilterItem) {
