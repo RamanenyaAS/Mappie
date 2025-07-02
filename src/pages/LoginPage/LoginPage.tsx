@@ -1,8 +1,9 @@
+import { useAppNavigation } from '@hooks/useAppNavigation';
 import { useAuth } from '@hooks/useAuth';
+import { useInput } from '@hooks/useInput';
 import { getFriendlyErrorMessage } from '@utils/getFriendlyErrorMessage';
 import { isValidEmail, isValidPassword } from '@utils/validation';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import {
   Button,
@@ -15,22 +16,22 @@ import {
 } from './LoginPage.styled';
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const email = useInput('');
+  const password = useInput('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const { goToRegister, goToResetPassword } = useAppNavigation();
   const { login, loginWithGoogle, loading } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!isValidEmail(email)) {
+    if (!isValidEmail(email.value)) {
       setError('Введите корректный email.');
       return;
     }
 
-    if (!isValidPassword(password)) {
+    if (!isValidPassword(password.value)) {
       setError(
         'Пароль должен быть минимум 8 символов, содержать хотя бы одну заглавную букву, одну строчную, цифру и специальный символ.'
       );
@@ -38,8 +39,8 @@ function LoginPage() {
     }
 
     try {
-      await login(email, password);
-    } catch (e: unknown) {
+      await login(email.value, password.value);
+    } catch (e) {
       setError(getFriendlyErrorMessage((e as Error).message));
     }
   };
@@ -48,7 +49,7 @@ function LoginPage() {
     setError('');
     try {
       await loginWithGoogle();
-    } catch (e: unknown) {
+    } catch (e) {
       setError(getFriendlyErrorMessage((e as Error).message));
     }
   };
@@ -57,33 +58,33 @@ function LoginPage() {
     <Form onSubmit={handleSubmit}>
       <h2>Вход</h2>
       <Input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={email.value}
+        onChange={email.onChange}
         placeholder="Email"
         type="email"
         autoComplete="email"
       />
       <Input
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        type="password"
+        value={password.value}
+        onChange={password.onChange}
         placeholder="Пароль"
+        type="password"
         autoComplete="current-password"
       />
-      <ForgotPassword onClick={() => navigate('/reset-password')}>
-        Забыли пароль?
-      </ForgotPassword>
-      {error && <ErrorMsg>{error}</ErrorMsg>}
       <Button type="submit" disabled={loading}>
         {loading ? 'Входим...' : 'Войти'}
       </Button>
       <GoogleButton type="button" onClick={handleGoogle} disabled={loading}>
-        Войти через Google
+        Войти с Google
       </GoogleButton>
+      {error && <ErrorMsg>{error}</ErrorMsg>}
+      <ForgotPassword onClick={goToResetPassword}>
+        Забыли пароль?
+      </ForgotPassword>
       <Switch>
         Нет аккаунта?{' '}
-        <Button type="button" onClick={() => navigate('/register')}>
-          Зарегистрируйтесь
+        <Button type="button" onClick={goToRegister}>
+          Зарегистрироваться
         </Button>
       </Switch>
     </Form>

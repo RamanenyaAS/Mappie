@@ -111,3 +111,8 @@ export const Title = styled.div`
     padding: 5px 0px 5px 20px;
   }
 `;
+
+export const CenteredContainer = styled.div`
+  ${centerContent};
+  height: 100vh;
+`;

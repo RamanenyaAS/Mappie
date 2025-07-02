@@ -1,15 +1,9 @@
 import { fontFamilies, fontWeights } from '@constants/theme';
-import { centerContent } from '@styles/BaseStyle';
 import styled, { keyframes } from 'styled-components';
 export const loadingAnim = keyframes`
   to {
     clip-path: inset(0 -1ch 0 0);
   }
-`;
-
-export const LoaderContainer = styled.div`
-  ${centerContent};
-  height: 100vh;
 `;
 
 export const LoaderWrapper = styled.div`

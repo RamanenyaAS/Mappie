@@ -15,6 +15,10 @@ function FavoritePanel() {
   const favorites = useSelector((state: RootState) => state.favorite.items);
   const dispatch = useDispatch();
 
+  const handleCardClick = (poi: IPOI) => () => {
+    handleSelect(poi);
+  };
+
   const handleSelect = useCallback(
     (poi: IPOI) => {
       dispatch(setSelectedPOI(poi));
@@ -46,7 +50,7 @@ function FavoritePanel() {
                 image={photo || ''}
                 icons={[]}
                 isFavorite={true}
-                onClick={() => handleSelect(item)}
+                onClick={handleCardClick(item)}
               />
             );
           })}

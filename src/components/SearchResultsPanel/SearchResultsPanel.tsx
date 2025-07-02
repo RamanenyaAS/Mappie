@@ -56,6 +56,13 @@ function SearchResultsPanel() {
     }
   };
 
+  const handleCardClick = (item: (typeof poi)[number]) => () => {
+    dispatch(setSelectedPOI(item));
+  };
+
+  const isItemFavorite = (id: string) =>
+    favorites.some((favoriteItem) => favoriteItem.id === id);
+
   if (loading) return <Panel>Загрузка...</Panel>;
   if (error) return <Panel>Ошибка: {error}</Panel>;
   if (!validPoi.length) return <Panel>Ничего не найдено</Panel>;
@@ -75,10 +82,10 @@ function SearchResultsPanel() {
             id={item.id}
             title={item.name || 'Без названия'}
             text={item.description || 'Описание недоступно'}
-            isFavorite={favorites.some((f: { id: string }) => f.id === item.id)}
+            isFavorite={isItemFavorite(item.id)}
             image={item.photo || ''}
             icons={[]}
-            onClick={() => dispatch(setSelectedPOI(item))}
+            onClick={handleCardClick(item)}
           />
         ))}
       </PanelContentWrapper>

@@ -1,7 +1,7 @@
-import { useAuth } from '@hooks/useAuth';
+import { useAppNavigation } from '@hooks/useAppNavigation';
+import { useInput } from '@hooks/useInput';
 import { isValidEmail, isValidPassword } from '@utils/validation';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import {
   Button,
@@ -13,43 +13,46 @@ import {
 } from './RegisterPage.styled';
 
 function RegisterPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const email = useInput('');
+  const password = useInput('');
   const [info, setInfo] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
-  const { loading } = useAuth();
+  const { goToVerifyEmail, goToLogin } = useAppNavigation();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setInfo('');
     setError('');
 
-    if (!isValidEmail(email)) {
+    if (!isValidEmail(email.value)) {
       setError('Введите корректный email.');
       return;
     }
 
-    if (!isValidPassword(password)) {
+    if (!isValidPassword(password.value)) {
       setError(
         'Пароль должен быть минимум 8 символов, содержать хотя бы одну заглавную букву, одну строчную, цифру и специальный символ.'
       );
       return;
     }
 
+    setLoading(true);
     try {
       const { registerWithVerification } = await import(
-        '../../utils/registerWithVerification'
+        '@utils/registerWithVerification'
       );
       await registerWithVerification(
-        email,
-        password,
-        navigate,
+        email.value,
+        password.value,
+        goToVerifyEmail,
         setInfo,
         setError
       );
-    } catch (e: unknown) {
+    } catch (e) {
       setError((e as Error).message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -57,15 +60,15 @@ function RegisterPage() {
     <Form onSubmit={handleSubmit}>
       <h2>Регистрация</h2>
       <Input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={email.value}
+        onChange={email.onChange}
         placeholder="Email"
         type="email"
         autoComplete="email"
       />
       <Input
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={password.value}
+        onChange={password.onChange}
         type="password"
         placeholder="Пароль"
         autoComplete="new-password"
@@ -77,7 +80,7 @@ function RegisterPage() {
       {error && <ErrorMsg>{error}</ErrorMsg>}
       <Switch>
         Уже есть аккаунт?{' '}
-        <Button type="button" onClick={() => navigate('/login')}>
+        <Button type="button" onClick={goToLogin}>
           Войти
         </Button>
       </Switch>

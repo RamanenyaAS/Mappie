@@ -5,27 +5,26 @@ import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 /* eslint-enable simple-import-sort/imports */
 
-import { memo, useMemo } from 'react';
-import { Circle, Marker, Popup, TileLayer, ZoomControl } from 'react-leaflet';
-import { useSelector } from 'react-redux';
-
+import type { TPOIMarkerProps } from '@appTypes/interfaces';
 import CenterButton from '@components/CenterButton/CenterButton';
-import RoutingLayer from '@components/RoutingLayer/RoutingLayer';
 import {
   DynamicCircleOptions,
   FixedCircleOptions,
   StyledMap,
   StyledMapContainer,
 } from '@components/Map/Map.styled';
+import RoutingLayer from '@components/RoutingLayer/RoutingLayer';
 import {
   DEFAULT_MAP_ZOOM,
   FIXED_CIRCLE_RADIUS,
   RADIUS_MULTIPLIER,
 } from '@constants/mapConfig';
-import { poiIcon, userLocationIcon, DefaultIcon } from '@utils/mapUtils';
 import { useUserLocation } from '@hooks/useUserLocation';
 import type { RootState } from '@store/store';
-import type { TPOIMarkerProps } from '@appTypes/interfaces';
+import { DefaultIcon, poiIcon, userLocationIcon } from '@utils/mapUtils';
+import { memo, useMemo } from 'react';
+import { Circle, Marker, Popup, TileLayer, ZoomControl } from 'react-leaflet';
+import { useSelector } from 'react-redux';
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
@@ -74,11 +73,13 @@ function Map() {
               pathOptions={DynamicCircleOptions}
             />
           )}
-          {visiblePOI.map(({ id, lat, lon, name }) => (
-            <POIMarker key={id} lat={lat} lon={lon} name={name} />
-          ))}
+          {!routeTarget &&
+            visiblePOI.map(({ id, lat, lon, name }) => (
+              <POIMarker key={id} lat={lat} lon={lon} name={name} />
+            ))}
           {routeTarget && (
             <Marker
+              key={`route-target-${routeTarget.lat}-${routeTarget.lon}`}
               position={[routeTarget.lat, routeTarget.lon]}
               icon={poiIcon}
             >
@@ -86,8 +87,13 @@ function Map() {
             </Marker>
           )}
           {routeTarget && position && (
-            <RoutingLayer from={position} to={routeTarget} />
+            <RoutingLayer
+              key={`routing-layer-${routeTarget.lat}-${routeTarget.lon}`}
+              from={position}
+              to={routeTarget}
+            />
           )}
+
           <ZoomControl position="bottomright" />
           <CenterButton position={position} />
         </StyledMapContainer>
