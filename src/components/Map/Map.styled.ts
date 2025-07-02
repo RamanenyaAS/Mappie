@@ -24,9 +24,9 @@ export const FixedCircleOptions = {
 };
 
 export const DynamicCircleOptions = {
-  fillColor: '#5E7BC71A',
-  fillOpacity: 1,
-  color: '#5E7BC733',
+  fillColor: '#5E7BC7',
+  fillOpacity: 0.2,
+  color: '#5E7BC7',
   weight: 3,
   dashArray: '10 10',
 };

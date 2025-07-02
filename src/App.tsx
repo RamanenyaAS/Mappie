@@ -1,3 +1,4 @@
+import ErrorPage from '@pages/ErrorPage/ErrorPage';
 import { Route, Routes } from 'react-router-dom';
 
 import Loader from './components/Loader/Loader';
@@ -29,6 +30,7 @@ function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/verify-email" element={<VerifyEmailPage />} />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
