@@ -4,7 +4,7 @@ import SearchInput from '@components/SearchInput/SearchInput';
 import { setSelectedPOI } from '@slices/poiSlice';
 import type { RootState } from '@store/store';
 import { PanelContentWrapper, Title } from '@styles/BaseStyle';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
@@ -14,6 +14,13 @@ function FavoritePanel() {
   const [searchValue, setSearchValue] = useState('');
   const favorites = useSelector((state: RootState) => state.favorite.items);
   const dispatch = useDispatch();
+
+  const handleSelect = useCallback(
+    (poi: IPOI) => {
+      dispatch(setSelectedPOI(poi));
+    },
+    [dispatch]
+  );
 
   const filteredFavorites = favorites.filter(
     (item: IPOI) =>
@@ -27,18 +34,22 @@ function FavoritePanel() {
       <Title>Избранное:</Title>
       <PanelContentWrapper>
         <CardList>
-          {filteredFavorites.map((item: IPOI) => (
-            <FavoriteCard
-              key={item.id}
-              id={item.id}
-              title={item.name || 'Без названия'}
-              text={item.description || 'Нет описания'}
-              image={item.photo || ''}
-              icons={[]}
-              isFavorite={true}
-              onClick={() => dispatch(setSelectedPOI(item))}
-            />
-          ))}
+          {filteredFavorites.map((item: IPOI) => {
+            const { id, name, description, photo } = item;
+
+            return (
+              <FavoriteCard
+                key={id}
+                id={id}
+                title={name || 'Без названия'}
+                text={description || 'Нет описания'}
+                image={photo || ''}
+                icons={[]}
+                isFavorite={true}
+                onClick={() => handleSelect(item)}
+              />
+            );
+          })}
         </CardList>
       </PanelContentWrapper>
     </Panel>

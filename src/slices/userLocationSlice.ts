@@ -8,7 +8,7 @@ interface ILocationStateWithRadius extends ILocationState {
 const initialState: ILocationStateWithRadius = {
   lat: null,
   lon: null,
-  radius: '45',
+  radius: '5',
 };
 
 const userLocationSlice = createSlice({

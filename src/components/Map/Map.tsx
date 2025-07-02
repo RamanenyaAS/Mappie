@@ -1,9 +1,16 @@
+/* eslint-disable simple-import-sort/imports */
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+/* eslint-enable simple-import-sort/imports */
 
-import { IconPOIMarker, IconUserLocation } from '@assets/icons';
+import { memo, useMemo } from 'react';
+import { Circle, Marker, Popup, TileLayer, ZoomControl } from 'react-leaflet';
+import { useSelector } from 'react-redux';
+
 import CenterButton from '@components/CenterButton/CenterButton';
+import RoutingLayer from '@components/RoutingLayer/RoutingLayer';
 import {
   DynamicCircleOptions,
   FixedCircleOptions,
@@ -12,113 +19,35 @@ import {
 } from '@components/Map/Map.styled';
 import {
   DEFAULT_MAP_ZOOM,
-  DEFAULT_MARKER_ICON_SIZE,
   FIXED_CIRCLE_RADIUS,
-  POI_ICON_SIZE,
   RADIUS_MULTIPLIER,
-  USER_ICON_SIZE,
 } from '@constants/mapConfig';
-import { setUserLocation } from '@slices/userLocationSlice';
+import { poiIcon, userLocationIcon, DefaultIcon } from '@utils/mapUtils';
+import { useUserLocation } from '@hooks/useUserLocation';
 import type { RootState } from '@store/store';
-import L from 'leaflet';
-import { useEffect, useRef, useState } from 'react';
-import {
-  Circle,
-  Marker,
-  Popup,
-  TileLayer,
-  useMap,
-  ZoomControl,
-} from 'react-leaflet';
-import { useDispatch, useSelector } from 'react-redux';
-
-const DefaultIcon = L.icon({
-  iconRetinaUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-  iconSize: DEFAULT_MARKER_ICON_SIZE,
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
+import type { TPOIMarkerProps } from '@appTypes/interfaces';
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const userLocationIcon = L.icon({
-  iconUrl: IconUserLocation,
-  iconSize: USER_ICON_SIZE,
-  iconAnchor: [10, 7],
-  popupAnchor: [0, -7],
+const POIMarker = memo(function POIMarker({ lat, lon, name }: TPOIMarkerProps) {
+  return (
+    <Marker position={[lat, lon]} icon={poiIcon}>
+      <Popup>{name || 'Без названия'}</Popup>
+    </Marker>
+  );
 });
-
-const poiIcon = L.icon({
-  iconUrl: IconPOIMarker,
-  iconSize: POI_ICON_SIZE,
-  iconAnchor: [9, 18],
-  popupAnchor: [0, -20],
-});
-
-function RoutingLayer({
-  from,
-  to,
-}: {
-  from: [number, number];
-  to: { lat: number; lon: number };
-}) {
-  const map = useMap();
-  const controlRef = useRef<L.Routing.Control | null>(null);
-
-  useEffect(() => {
-    if (controlRef.current) {
-      map.removeControl(controlRef.current);
-    }
-
-    const routingControl = L.Routing.control({
-      waypoints: [L.latLng(from[0], from[1]), L.latLng(to.lat, to.lon)],
-      routeWhileDragging: false,
-      addWaypoints: false,
-      draggableWaypoints: false,
-      createMarker: () => null,
-      show: false,
-    });
-
-    controlRef.current = routingControl;
-    routingControl.addTo(map);
-
-    const container = routingControl.getContainer();
-    if (container && container.parentNode) {
-      container.parentNode.removeChild(container);
-    }
-
-    return () => {
-      if (controlRef.current) {
-        map.removeControl(controlRef.current);
-      }
-    };
-  }, [from, to, map]);
-
-  return null;
-}
 
 function Map() {
-  const dispatch = useDispatch();
-  const [position, setPosition] = useState<[number, number] | null>(null);
+  const position = useUserLocation();
   const poi = useSelector((state: RootState) => state.poi.items);
   const searchRadius = useSelector(
     (state: RootState) => state.userLocation.radius
   );
   const routeTarget = useSelector((state: RootState) => state.route.target);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      const { latitude, longitude } = pos.coords;
-      setPosition([latitude, longitude]);
-      dispatch(setUserLocation({ lat: latitude, lon: longitude }));
-    });
-  }, [dispatch]);
+  const visiblePOI = useMemo(() => {
+    return poi.filter((item) => item.lat && item.lon);
+  }, [poi]);
 
   return (
     <StyledMap>
@@ -145,19 +74,9 @@ function Map() {
               pathOptions={DynamicCircleOptions}
             />
           )}
-          {poi.map(
-            (item) =>
-              item.lat &&
-              item.lon && (
-                <Marker
-                  key={item.id}
-                  position={[item.lat, item.lon]}
-                  icon={poiIcon}
-                >
-                  <Popup>{item.name || 'Без названия'}</Popup>
-                </Marker>
-              )
-          )}
+          {visiblePOI.map(({ id, lat, lon, name }) => (
+            <POIMarker key={id} id={id} lat={lat} lon={lon} name={name} />
+          ))}
           {routeTarget && (
             <Marker
               position={[routeTarget.lat, routeTarget.lon]}
