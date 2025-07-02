@@ -3,6 +3,7 @@ import SearchButton from '@components/SearchButton/SearchButton';
 import SearchInput from '@components/SearchInput/SearchInput';
 import { filters } from '@constants/filters';
 import { fetchPOI, fetchPOIByName } from '@slices/poiSlice';
+import { clearRouteTarget } from '@slices/routeSlice';
 import { setSearchRadius } from '@slices/userLocationSlice';
 import type { AppDispatch, RootState } from '@store/store';
 import { Title } from '@styles/BaseStyle';
@@ -24,7 +25,6 @@ function SearchPanel() {
 
   const dispatch = useDispatch<AppDispatch>();
   const userLocation = useSelector((state: RootState) => state.userLocation);
-
   const radius = useSelector((state: RootState) => state.userLocation.radius);
 
   const handleSearch = () => {
@@ -32,6 +32,8 @@ function SearchPanel() {
       alert('Местоположение не определено');
       return;
     }
+
+    dispatch(clearRouteTarget());
 
     const selectedCategories = filters
       .filter((f) => selectedFilters.includes(f.label))
