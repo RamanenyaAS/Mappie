@@ -63,6 +63,14 @@ function SearchPanel() {
     }
   };
 
+  const handleFilterClick = (label: string) => () => {
+    toggleFilter(label);
+  };
+
+  const handleRadiusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchRadius(event.target.value));
+  };
+
   return (
     <Panel>
       <TopSection>
@@ -80,7 +88,7 @@ function SearchPanel() {
               label={item.label}
               category={item.category}
               selected={selectedFilters.includes(item.label)}
-              onClick={() => toggleFilter(item.label)}
+              onClick={handleFilterClick(item.label)}
             />
           ))}
         </FilterBlock>
@@ -89,7 +97,7 @@ function SearchPanel() {
           <RadiusInput
             type="number"
             value={radius}
-            onChange={(e) => dispatch(setSearchRadius(e.target.value))}
+            onChange={handleRadiusChange}
           />
           <RadiusInputText>км</RadiusInputText>
         </DistanceBlock>

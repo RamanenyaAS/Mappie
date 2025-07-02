@@ -29,6 +29,10 @@ function FavoriteCard({
 
   const [hasImageError, setHasImageError] = useState(false);
 
+  const handleImageError = () => {
+    setHasImageError(true);
+  };
+
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (isFavorite) {
@@ -54,7 +58,8 @@ function FavoriteCard({
           <CardImage
             src={image}
             alt={title}
-            onError={() => setHasImageError(true)}
+            title={title}
+            onError={handleImageError}
           />
         ) : (
           <Placeholder>Нет фото</Placeholder>

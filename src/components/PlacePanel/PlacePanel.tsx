@@ -29,6 +29,12 @@ function PlacePanel() {
 
   if (!poi) return null;
 
+  const handleRouteClick = () => {
+    if (poi?.lat && poi?.lon) {
+      dispatch(setRouteTarget({ lat: poi.lat, lon: poi.lon }));
+    }
+  };
+
   const handleFavoriteToggle = () => {
     if (!poi) return;
     if (isFavorite) {
@@ -36,6 +42,10 @@ function PlacePanel() {
     } else {
       dispatch(addFavorite(poi));
     }
+  };
+
+  const handleImageError = () => {
+    setHasImageError(true);
   };
 
   return (
@@ -47,7 +57,8 @@ function PlacePanel() {
           <PlaceImage
             src={poi.photo}
             alt={poi.name}
-            onError={() => setHasImageError(true)}
+            title={poi.name}
+            onError={handleImageError}
           />
         ) : (
           <Placeholder>Нет фото</Placeholder>
@@ -59,13 +70,7 @@ function PlacePanel() {
             <IconFavorite />
             Избранное
           </FavoriteButton>
-          <RouteButton
-            onClick={() => {
-              if (poi?.lat && poi?.lon) {
-                dispatch(setRouteTarget({ lat: poi.lat, lon: poi.lon }));
-              }
-            }}
-          >
+          <RouteButton onClick={handleRouteClick}>
             <IconRoute />
             Маршрут
           </RouteButton>

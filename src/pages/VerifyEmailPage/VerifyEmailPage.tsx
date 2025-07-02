@@ -1,14 +1,15 @@
 import { auth } from '@firebase';
+import { useAppNavigation } from '@hooks/useAppNavigation';
 import type { RootState } from '@store/store';
 import { sendEmailVerification } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Form, useNavigate } from 'react-router-dom';
 
 import {
   Button,
   ButtonBlock,
   ErrorMsg,
+  Form,
   Info,
   Text,
   Title,
@@ -16,7 +17,7 @@ import {
 
 const VerifyEmailPage: React.FC = () => {
   const user = useSelector((state: RootState) => state.user);
-  const navigate = useNavigate();
+  const { goToLogin } = useAppNavigation();
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [canResend, setCanResend] = useState(true);
@@ -74,7 +75,7 @@ const VerifyEmailPage: React.FC = () => {
       {!currentUser ? (
         <>
           <ErrorMsg>Войдите в аккаунт, чтобы подтвердить почту.</ErrorMsg>
-          <Button type="button" onClick={() => navigate('/login')}>
+          <Button type="button" onClick={goToLogin}>
             Войти
           </Button>
         </>
@@ -96,9 +97,11 @@ const VerifyEmailPage: React.FC = () => {
             >
               {loading
                 ? 'Отправляем...'
-                : `Отправить повторно${!canResend && timer > 0 ? ` (${timer} сек)` : ''}`}
+                : `Отправить повторно${
+                    !canResend && timer > 0 ? ` (${timer} сек)` : ''
+                  }`}
             </Button>
-            <Button type="button" onClick={() => navigate('/login')}>
+            <Button type="button" onClick={goToLogin}>
               На главную
             </Button>
           </ButtonBlock>
